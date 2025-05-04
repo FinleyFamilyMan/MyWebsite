@@ -1,0 +1,154 @@
+/* Basic Reset & Body Style */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Georgia, serif; /* Using Georgia as requested */
+    line-height: 1.6;
+    /* 2000s Style Gradient Background - Blue/Green */
+    background: linear-gradient(to bottom, #ADD8E6, #90EE90); /* Light Blue to Light Green */
+    color: #333; /* Dark grey text for readability */
+}
+
+/* Header and Navigation */
+.main-header {
+    /* Gradient background for header - maybe a darker shade */
+    background: linear-gradient(to bottom, #4682B4, #2E8B57); /* Steel Blue to Sea Green */
+    color: white;
+    padding: 15px 20px;
+    border-bottom: 3px solid #2F4F4F; /* Dark Slate Gray border */
+    text-align: center;
+}
+
+.main-header h1 {
+    margin: 0;
+    padding-bottom: 10px;
+    font-size: 2.5em; /* Larger title */
+}
+
+.main-header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Use flexbox for simple horizontal layout */
+    justify-content: center; /* Center navigation items */
+    gap: 15px; /* Space between items */
+}
+
+.main-header nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border: 1px solid #FAF0E6; /* Light Linen border */
+    border-radius: 5px; /* Slightly rounded corners */
+    /* Button-like gradient */
+    background: linear-gradient(to bottom, #6495ED, #4682B4); /* Cornflower Blue to Steel Blue */
+    display: block; /* Make the whole area clickable */
+    transition: background 0.3s ease; /* Smooth transition on hover */
+}
+
+.main-header nav ul li a:hover,
+.main-header nav ul li a.active {
+    /* Slightly darker gradient on hover/active */
+    background: linear-gradient(to bottom, #4169E1, #2E8B57); /* Royal Blue to Sea Green */
+    color: #FFFFE0; /* Light Yellow text */
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.3); /* Subtle shadow for depth */
+}
+
+/* Main Content Area */
+.content-area {
+    max-width: 900px; /* Limit width for readability */
+    margin: 20px auto; /* Center content area */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    border: 2px solid #A9A9A9; /* Dark Gray border */
+    border-radius: 8px; /* Rounded corners for the main content box */
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.2); /* Add a shadow for a raised effect */
+}
+
+/* Card Style for Sections */
+.card {
+    background-color: #F5F5F5; /* Light gray background for cards */
+    border: 1px solid #D3D3D3; /* Light gray border */
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px; /* Consistent rounded corners */
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.1); /* Subtle shadow */
+}
+
+h2, h3 {
+    color: #2E8B57; /* Sea Green for headings */
+    border-bottom: 1px dashed #4682B4; /* Steel Blue dashed underline */
+    padding-bottom: 5px;
+}
+
+a {
+    color: #4682B4; /* Steel Blue links */
+}
+a:hover {
+    color: #FF4500; /* OrangeRed on hover - classic contrast */
+    text-decoration: none;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #D3D3D3;
+    margin: 15px 0;
+}
+
+/* Photo Gallery Styles */
+.photo-gallery {
+    display: grid; /* Use grid for simple layout */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+    gap: 15px; /* Space between photos */
+}
+
+.photo-item img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid #ccc; /* Simple border around images */
+    margin-bottom: 5px;
+}
+
+.photo-item p {
+    font-size: 0.9em;
+    text-align: center;
+    margin: 0;
+    color: #555;
+}
+
+/* Blog Post Styles */
+.blog-summary h3 a {
+    text-decoration: none;
+    color: #2E8B57;
+}
+.blog-summary h3 a:hover {
+    color: #FF4500;
+}
+
+.blog-summary p em { /* Style for the date */
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* Footer */
+.main-footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 15px;
+    /* Footer gradient - subtle gray */
+    background: linear-gradient(to bottom, #DCDCDC, #C0C0C0); /* Gainsboro to Silver */
+    color: #333;
+    border-top: 2px solid #A9A9A9; /* Dark Gray border */
+    font-size: 0.9em;
+}
+
+/* Individual Blog Post Specific Styles (if needed) */
+.blog-post-content img {
+    max-width: 100%; /* Make images in posts responsive */
+    height: auto;
+    display: block;
+    margin: 15px auto; /* Center images with space */
+    border: 1px solid #ccc;
+}
