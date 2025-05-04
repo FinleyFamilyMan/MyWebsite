@@ -1,76 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Finley Family Website - Home</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+---
+layout: default # Use the default layout
+title: Home # Optional page title override
+---
 
-    <header class="main-header">
-        <h1>The Finley Family Website</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="photos.html">Photos</a></li>
-                <li><a href="blog.html">Blog</a></li>
-            </ul>
-        </nav>
-    </header>
+<section class="welcome-section card">
+    <h2>Welcome!</h2>
+    <img src="{{ '/assets/images/family_photo_placeholder.JPEG' | relative_url }}" alt="Finley Family Photo" style="max-width: 80%; height: auto; display: block; margin: 10px auto;">
+    <p>Welcome to our little corner of the internet! We're glad you stopped by.</p>
+    <p>Check out some of our memories on the <a href="{{ '/photos.html' | relative_url }}">Photos Page</a>.</p>
+</section>
 
-    <main class="content-area">
+<section class="latest-post card">
+    <h2>Latest Blog Post</h2>
+    {% assign latest_post = site.posts | first %} {% if latest_post %}
+        <h3><a href="{{ latest_post.url | relative_url }}">{{ latest_post.title | escape }}</a></h3>
+        <p><em>Posted: {{ latest_post.date | date: "%B %d, %Y" }}</em></p>
+        {{ latest_post.excerpt }}
+        <p><a href="{{ latest_post.url | relative_url }}">Read More...</a></p>
+    {% else %}
+        <p>No blog posts yet!</p>
+    {% endif %}
+    <hr>
+    <p>See all entries on the <a href="{{ '/blog.html' | relative_url }}">Blog Page</a>.</p>
+</section>
 
-        <section class="welcome-section card">
-            <h2>Welcome!</h2>
-            <img src="images/family_photo_placeholder.JPEG" alt="Finley Family Photo" style="max-width: 80%; height: auto; display: block; margin: 10px auto; border-radius: 6px;"> <p>Welcome to our little corner of the internet! We're glad you stopped by.</p>
-            <p>Check out some of our memories on the <a href="photos.html">Photos Page</a>.</p>
-        </section>
+<section class="about-section card">
+    <h2>About Our Family</h2>
+    <img src="{{ '/assets/images/about_photo_placeholder.JPEG' | relative_url }}" alt="Another family picture" style="max-width: 60%; height: auto; display: block; margin: 10px auto 20px auto;">
+    <p>We are the Finley Family! Amelia and Isaac started dating as highschool sweethearts in 2019, where through college their love blossomed and adopted a beautiful Black and Silver Lab named Daisy Blu Finley, or Blu for short.</p>
 
-        <section class="latest-post card">
-            <h2>Latest Blog Post</h2>
-            <h3>Our First Blog!(Placeholder) </h3> <p>This is where our first blog post will go, for now this is a placeholder...</p> <p><a href="blog/post1.html">Read More...</a></p> <hr>
-            <p>See all entries on the <a href="blog.html">Blog Page</a>.</p>
-        </section>
+    <div style="display: flex; align-items: flex-start; gap: 20px; margin-top: 20px; margin-bottom: 20px;">
+        <div style="flex-basis: 40%; flex-shrink: 0;">
+            <img src="{{ '/assets/images/Proposal_Photo_Home_Page.JPEG' | relative_url }}" alt="Proposal Photo" style="max-width: 100%; height: auto; display: block;">
+        </div>
+        <div style="flex-grow: 1;">
+             <p>Isaac Proposed on Amelia's Birthday, April 12th, 2023, at Cypress Grove Park, Orlando Florida and she said YES!</p>
+        </div>
+    </div>
 
-        <section class="about-section card">
-            <h2>About Our Family</h2>
-            <img src="images/about_photo_placeholder.JPEG" alt="Another family picture" style="max-width: 60%; height: auto; display: block; margin: 10px auto 20px auto; border-radius: 6px;"> <p>We are the Finley Family! Amelia and Isaac started dating as highschool sweethearts in 2019, where through college their love blossomed and adopted a beautiful Black and Silver Lab named Daisy Blu Finley, or Blu for short. <br> </p>
+    <div style="display: flex; align-items: flex-start; gap: 20px; margin-bottom: 20px;">
+        <div style="flex-basis: 40%; flex-shrink: 0;">
+            <img src="{{ '/assets/images/Just_Married.JPEG' | relative_url }}" alt="Just Married Photo" style="max-width: 100%; height: auto; display: block;">
+        </div>
+        <div style="flex-grow: 1;">
+             <p>They had a beautiful wedding together on January 12th, 2024 at the Winter Park Events Center.</p>
+        </div>
+    </div>
 
-            <div style="display: flex; align-items: flex-start; gap: 20px; margin-top: 20px; margin-bottom: 20px;">
-                <div style="flex-basis: 40%; flex-shrink: 0;">
-                    <img src="images/Proposal_Photo_Home_Page.JPEG" alt="Proposal Photo" style="max-width: 100%; height: auto; display: block; border-radius: 6px;">
-                </div>
-                <div style="flex-grow: 1;">
-                     <p>Isaac Proposed on Amelia's Birthday, April 12th, 2023, at Cypress Grove Park, Orlando Florida and she said YES!</p>
-                </div>
-            </div>
-
-            <div style="display: flex; align-items: flex-start; gap: 20px; margin-bottom: 20px;">
-                <div style="flex-basis: 40%; flex-shrink: 0;">
-                     <img src="images/Just_Married.JPEG" alt="Just Married Photo" style="max-width: 100%; height: auto; display: block; border-radius: 6px;">
-                </div>
-                 <div style="flex-grow: 1;">
-                     <p>They had a beautiful wedding together on January 12th, 2024 at the Winter Park Events Center.</p>
-                </div>
-            </div>
-
-            <div style="display: flex; align-items: flex-start; gap: 20px; margin-bottom: 20px;">
-                 <div style="flex-basis: 40%; flex-shrink: 0;">
-                     <img src="images/Blu_With_Flower_Photo.JPEG" alt="Blu with a Flower Photo" style="max-width: 100%; height: auto; display: block; border-radius: 6px;">
-                </div>
-                 <div style="flex-grow: 1;">
-                     <p> And ever since then they have been living together Happily (with Blu).</p>
-                </div>
-            </div>
-
-        </section>
-
-    </main>
-
-    <footer class="main-footer">
-        <p>&copy; 2025 The Finley Family</p>
-    </footer>
-
-</body>
-</html>
+    <div style="display: flex; align-items: flex-start; gap: 20px; margin-bottom: 20px;">
+        <div style="flex-basis: 40%; flex-shrink: 0;">
+            <img src="{{ '/assets/images/Blu_With_Flower_Photo.JPEG' | relative_url }}" alt="Blu with a Flower Photo" style="max-width: 100%; height: auto; display: block;">
+        </div>
+        <div style="flex-grow: 1;">
+             <p>and since then have been living together Happily (with Blu) in Orlando Florida.</p>
+        </div>
+    </div>
+</section>

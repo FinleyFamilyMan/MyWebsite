@@ -1,0 +1,38 @@
+---
+layout: default # Use the default layout as the base
+---
+<article class="recipe-content card">
+
+  <header>
+    <h2>{{ page.title | escape }}</h2>
+    {% if page.prep_time %}
+        <p><strong>Prep time:</strong> {{ page.prep_time }}</p>
+    {% endif %}
+    {% if page.cook_time %}
+        <p><strong>Cook time:</strong> {{ page.cook_time }}</p>
+    {% endif %}
+     {% if page.servings %}
+        <p><strong>Servings:</strong> {{ page.servings }}</p>
+    {% endif %}
+  </header>
+
+  {% if page.ingredients %}
+    <section class="ingredients">
+        <h3>Ingredients</h3>
+        <ul>
+            {% for item in page.ingredients %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+  {% endif %}
+
+  <section class="instructions">
+    <h3>Instructions</h3>
+    {{ content }}
+  </section>
+
+  <hr>
+  <p><a href="{{ '/recipes.html' | relative_url }}">&laquo; Back to Recipe List</a></p>
+
+</article>

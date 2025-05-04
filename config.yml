@@ -1,0 +1,32 @@
+# Site settings
+title: The Finley Family Website
+email: your-email@example.com # Optional
+description: >- # this means to ignore newlines until "baseurl:"
+  Our family's little corner of the internet. Welcome!
+baseurl: "" # the subpath of your site, e.g. /blog. Usually leave empty if using username.github.io or custom domain. Check your GitHub pages URL. If it's yourusername.github.io/your-repo-name then set this to "/your-repo-name"
+url: "https://yourusername.github.io" # the base hostname & protocol for your site (replace with your actual live URL)
+github_username: yourusername # Optional
+
+# Build settings
+markdown: kramdown
+theme: minima # You can use a theme, but we'll override with custom layouts/CSS
+plugins:
+  - jekyll-feed
+
+# Collections Settings (for Recipes)
+collections:
+  recipes:
+    output: true # Generate individual pages for each recipe
+    permalink: /recipes/:path/ # URL structure for recipe pages
+
+# Exclude from processing.
+# The following items will not be processed, by default. Create a custom list
+# to override the default setting.
+# exclude:
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/

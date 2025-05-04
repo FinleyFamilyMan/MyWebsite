@@ -1,0 +1,18 @@
+---
+layout: default # Use the default layout as the base
+---
+<article class="blog-post-content card">
+
+  <header>
+    <h2>{{ page.title | escape }}</h2>
+    <p class="post-meta"><em>Posted: {{ page.date | date: "%B %d, %Y" }}</em></p>
+  </header>
+
+  <div>
+    {{ content }}
+  </div>
+
+  <hr>
+  <p><a href="{{ '/blog.html' | relative_url }}">&laquo; Back to Blog List</a></p>
+
+</article>

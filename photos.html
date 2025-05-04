@@ -1,47 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finley Family Photos</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+---
+layout: default
+title: Finley Family Photos
+---
 
-    <header class="main-header">
-        <h1>The Finley Family Website</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="photos.html" class="active">Photos</a></li>
-                <li><a href="blog.html">Blog</a></li>
-            </ul>
-        </nav>
-    </header>
+<h2>Family Photo Gallery</h2>
+<p>Some moments we've captured!</p>
 
-    <main class="content-area">
+<div class="photo-gallery">
+    <div class="photo-item card">
+        <img src="{{ '/assets/images/photo1_placeholder.jpg' | relative_url }}" alt="Description of photo 1">
+        <p>Caption for photo 1 goes here.</p>
+    </div>
 
-        <h2>Family Photo Gallery</h2>
-        <p>Some moments we've captured!</p>
+    <div class="photo-item card">
+        <img src="{{ '/assets/images/photo2_placeholder.jpg' | relative_url }}" alt="Description of photo 2">
+        <p>Caption for photo 2.</p>
+    </div>
 
-        <div class="photo-gallery">
-            <div class="photo-item card">
-                <img src="images/photo1_placeholder.JPEG" alt="Description of photo 1">
-                <p>Caption for photo 1 goes here.</p>
-            </div>
-
-            <div class="photo-item card">
-                <img src="images/photo2_placeholder.JPEG" alt="Description of photo 2">
-                <p>Caption for photo 2.</p>
-            </div>
-
-            </div>
-
-    </main>
-
-    <footer class="main-footer">
-        <p>&copy; 2025 The Finley Family</p>
-    </footer>
-
-</body>
-</html>
+    </div>
