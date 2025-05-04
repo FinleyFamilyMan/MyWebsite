@@ -75,6 +75,11 @@ body {
     box-shadow: 1px 1px 4px rgba(0,0,0,0.1); /* Subtle shadow */
 }
 
+/* NEW RULE: Apply rounded corners to images directly within cards */
+.card img {
+    border-radius: 6px;
+}
+
 h2, h3 {
     color: #2E8B57; /* Sea Green for headings */
     border-bottom: 1px dashed #4682B4; /* Steel Blue dashed underline */
@@ -109,6 +114,7 @@ hr {
     display: block;
     border: 1px solid #ccc; /* Simple border around images */
     margin-bottom: 5px;
+    border-radius: 6px; /* ADDED: Rounded corners for gallery images */
 }
 
 .photo-item p {
@@ -151,4 +157,5 @@ hr {
     display: block;
     margin: 15px auto; /* Center images with space */
     border: 1px solid #ccc;
+    border-radius: 6px; /* ADDED: Rounded corners for blog post images */
 }
