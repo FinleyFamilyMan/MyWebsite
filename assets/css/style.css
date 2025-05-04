@@ -56,13 +56,16 @@ body {
 
 /* Main Content Area */
 .content-area {
-    max-width: 900px; /* Limit width for readability */
-    margin: 20px auto; /* Center content area */
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-    border: 2px solid #A9A9A9; /* Dark Gray border */
-    border-radius: 8px; /* Rounded corners for the main content box */
-    box-shadow: 3px 3px 8px rgba(0,0,0,0.2); /* Add a shadow for a raised effect */
+    max-width: 900px; /* Limit width (adjust value if needed) */
+    margin-left: auto;  /* Center the block */
+    margin-right: auto; /* Center the block */
+    margin-top: 20px;   /* Add space above */
+    margin-bottom: 20px; /* Add space below */
+    padding: 20px;      /* Keep padding inside */
+    background-color: rgba(255, 255, 255, 0.8); /* Your background */
+    border: 2px solid #A9A9A9; /* Your border */
+    border-radius: 8px; /* Your border-radius */
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.2); /* Your shadow */
 }
 
 /* Card Style for Sections */
