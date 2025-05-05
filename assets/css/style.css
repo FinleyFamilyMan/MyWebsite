@@ -739,8 +739,10 @@ footer {
   display: inline-block;
   background-color: #007bff; /* Blue button */
   color: white !important;
-  padding: 10px 20px;
-  border-radius: 20px; /* Pill shape */
+  /* padding: 10px 20px; /* OLD PADDING */
+  padding: 5px 12px; /* NEW SMALLER PADDING */
+  font-size: 0.9em; /* NEW SMALLER FONT SIZE */
+  border-radius: 15px; /* Make slightly less rounded for smaller size */
   text-decoration: none !important;
   font-weight: bold;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
