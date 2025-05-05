@@ -12,28 +12,28 @@ font: "Georgia, serif"
 # Build settings
 markdown: kramdown
 theme: minima
-plugins: # Add jekyll-archives here
+plugins: # Use standard spaces for indentation
   - jekyll-feed
-  - jekyll-archives # Make sure this is listed
+  - jekyll-archives # Indented with 2 standard spaces
 
-# Jekyll Archives configuration (Add this whole block)
+# Jekyll Archives configuration (Use standard spaces for indentation)
 jekyll-archives:
-  enabled:
-    - tags # Enable archive generation for tags
-  layout: tag_page # The layout file to use for tag pages (we'll create this)
-  permalinks:
-    tag: '/recipes/tags/:name/' # URL structure for tag pages
+  enabled: # Indented with 2 standard spaces
+    - tags # Indented with 4 standard spaces
+  layout: tag_page # Indented with 2 standard spaces
+  permalinks: # Indented with 2 standard spaces
+    tag: '/recipes/tags/:name/' # Indented with 4 standard spaces
 
-# Collections Configuration
+# Collections Configuration (Ensure standard spaces here too)
 collections:
-  albums:
-    output: true # Generate individual pages for each album
-    sort_by: date # Sort albums by date (requires date in front matter)
-    permalink: /albums/:title/ # URL structure for album pages
-  recipes: # Add this new block for recipes
-    output: true # Generate individual pages for each recipe
-    sort_by: title # Default sort alphabetically by title
-    permalink: /recipes/:title/ # URL structure like /MyWebsite/recipes/grandmas-cookies/
+  albums: # Indented with 2 standard spaces
+    output: true # Indented with 4 standard spaces
+    sort_by: date # Indented with 4 standard spaces
+    permalink: /albums/:title/ # Indented with 4 standard spaces
+  recipes: # Indented with 2 standard spaces
+    output: true # Indented with 4 standard spaces
+    sort_by: title # Indented with 4 standard spaces
+    permalink: /recipes/:title/ # Indented with 4 standard spaces
 
 # Exclude from processing
 # exclude:
