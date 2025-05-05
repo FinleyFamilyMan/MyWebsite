@@ -14,9 +14,31 @@ title: Home
 
 <div class="latest-post-section">
     <h2>Latest Blog Post</h2>
-    <p><em>(Our most recent blog post update will automatically show up here once the Blog page is set up.)</em></p>
+    {% assign latest_post = site.posts | first %}
+    {% if latest_post %}
+      <article class="post-preview-item event-item" style="flex: 1 1 100%; background-color: #fff; border: none; padding: 0;"> {# Use full width & remove card bg/border for home page preview #}
+          <header>
+              <h3 class="post-preview-title" style="font-size: 1.6em;"> {# Make title slightly larger here #}
+                <a href="{{ latest_post.url | relative_url }}">{{ latest_post.title | escape }}</a>
+              </h3>
+              <p class="post-meta">
+                <time datetime="{{ latest_post.date | date_to_xmlschema }}">{{ latest_post.date | date: "%B %d, %Y" }}</time>
+                {% if latest_post.author %}
+                  • <span class="post-author">{{ latest_post.author | escape }}</span>
+                {% endif %}
+              </p>
+          </header>
+          <div class="post-excerpt">
+            {{ latest_post.excerpt }}
+          </div>
+          <footer class="post-read-more">
+             <a href="{{ latest_post.url | relative_url }}" class="read-more-btn">Read More...</a>
+          </footer>
+        </article>
+    {% else %}
+      <p><em>No blog posts yet! Check back soon.</em></p>
+    {% endif %}
 </div>
-
 <hr style="margin: 30px 0;">
 
 <div class="about-section">
