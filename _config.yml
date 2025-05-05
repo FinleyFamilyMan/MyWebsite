@@ -15,6 +15,13 @@ theme: minima # We'll override this with our custom styles, but it provides a ba
 plugins:
   - jekyll-feed
 
+# Collections Configuration
+collections:
+  albums:
+    output: true # Generate individual pages for each album
+    sort_by: date # Sort albums by date (requires date in front matter)
+    permalink: /albums/:title/ # URL structure for album pages
+
 # Exclude from processing
 # exclude:
 #   - Gemfile
