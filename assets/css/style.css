@@ -379,3 +379,135 @@ footer {
 
 .post-navigation .prev-post { text-align: left; }
 .post-navigation .next-post { text-align: right; }
+
+
+/* === Album & Photo Specific Styles === */
+
+/* Styling for the main Photos page (list of albums) */
+.album-list-container {
+    gap: 30px; /* Spacing between album cards */
+}
+
+.album-preview-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.album-preview-item header {
+    margin-bottom: 10px;
+}
+.album-preview-title {
+    font-size: 1.4em;
+    margin-bottom: 5px;
+    color: #0056b3;
+}
+.album-preview-title a {
+    text-decoration: none;
+    color: inherit;
+}
+.album-preview-title a:hover {
+    text-decoration: underline;
+    color: #007bff;
+}
+
+.album-preview-images {
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
+.album-main-image {
+    width: 100%;
+    height: auto;
+    max-height: 250px; /* Limit height of main preview */
+    object-fit: cover; /* Cover the area, might crop */
+    border-radius: 5px;
+    border: 1px solid #eee;
+    display: block;
+    margin-bottom: 10px;
+    background-color: #f0f0f0; /* BG for placeholder */
+}
+.album-thumbnails {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    gap: 5px; /* Small gap between thumbnails */
+    min-height: 52px; /* Ensure space even if few thumbs */
+}
+.album-thumbnails a {
+    display: block; /* Ensure link takes up grid space */
+    line-height: 0; /* Prevent extra space */
+}
+.album-thumbnails img {
+    width: 100%;
+    height: 50px; /* Fixed height for thumbnails */
+    object-fit: cover; /* Cover the area, might crop */
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    background-color: #f0f0f0; /* BG for placeholder */
+    opacity: 0.85;
+    transition: opacity 0.3s ease;
+}
+.album-thumbnails img:hover {
+    opacity: 1;
+}
+
+.album-caption {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.5;
+    flex-grow: 1; /* Allow caption to take space */
+}
+
+/* Styling for individual Album pages (_layouts/album.html) */
+.album-blurb {
+    background-color: #f9f9f9;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    font-size: 1.05em;
+    line-height: 1.6;
+    border-left: 5px solid #90EE90; /* Light green border */
+}
+.album-blurb p:last-child {
+    margin-bottom: 0;
+}
+
+.album-photos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Responsive grid */
+    gap: 15px; /* Gap between photos */
+}
+
+.album-photo-item {
+   border: 1px solid #eee;
+   border-radius: 8px;
+   padding: 10px;
+   background-color: #fff;
+   text-align: center;
+   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+   display: flex; /* Use flexbox */
+   flex-direction: column; /* Stack image and caption */
+   justify-content: space-between; /* Push caption down */
+}
+
+.album-photo-item img {
+    max-width: 100%;
+    height: 150px; /* Fixed height for consistency */
+    object-fit: cover; /* Use cover to fill space nicely */
+    display: block;
+    margin: 0 auto 10px auto; /* Center image */
+    border-radius: 4px;
+    background-color: #f0f0f0; /* BG for placeholder */
+}
+.album-photo-item a {
+    display: block;
+    text-decoration: none;
+}
+
+.photo-caption {
+    font-size: 0.85em;
+    color: #666;
+    margin-top: auto; /* Push caption to bottom */
+    line-height: 1.4;
+    word-wrap: break-word; /* Wrap long captions */
+    min-height: 2.8em; /* Reserve space for ~2 lines */
+}
