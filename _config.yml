@@ -1,8 +1,10 @@
 # Basic Site Settings
 title: The Finley Family Website
 description: "Our little corner of the internet."
-baseurl: "" # Keep this empty if using username.github.io repo name
-url: "https://finleyfamilyman.github.io/MyWebsite/" # Replace with your site URL
+# The main domain part ONLY (no subdirectory here)
+url: "https://finleyfamilyman.github.io"
+# The subdirectory your site lives in (starts with a slash!)
+baseurl: "/MyWebsite"
 
 # Use Georgia Font (we'll implement this fully in CSS)
 font: "Georgia, serif"
