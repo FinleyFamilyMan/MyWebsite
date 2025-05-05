@@ -33,8 +33,7 @@ layout: default # Inherits the main header, footer, styling from default.html
       {% if page.previous.url %}
         <a href="{{ page.previous.url | relative_url }}" class="prev-post" title="Previous Post: {{ page.previous.title | escape }}">&laquo; Previous: {{ page.previous.title | truncatewords: 5 | escape }}</a>
       {% else %}
-        <span>&nbsp;</span> {# Placeholder to keep spacing consistent #}
-      {% endif %}
+        <span>&nbsp;</span> {% endif %}
       {% if page.next.url %}
         <a href="{{ page.next.url | relative_url }}" class="next-post" title="Next Post: {{ page.next.title | escape }}">Next: {{ page.next.title | truncatewords: 5 | escape }} &raquo;</a>
       {% endif %}
