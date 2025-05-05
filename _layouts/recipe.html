@@ -30,7 +30,7 @@ layout: default # Inherits header/footer
                   <a href="{{ tag_url }}" class="recipe-meta-tag-link" title="View all recipes tagged '{{ tag | escape }}'">{{ tag | escape }}</a>{% unless forloop.last %}, {% endunless %}{% comment %} Add comma unless it's the last tag {% endcomment %}
                 {% endfor %} 
             </div>
-          {% endif %} {# This endif correctly closes the if page.tags block #}
+          {% endif %} 
           {% comment %} Corrected Tag Section End {% endcomment %}
       </div>
   </div>
