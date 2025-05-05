@@ -1,0 +1,43 @@
+---
+layout: default # Inherits the main header, footer, styling from default.html
+---
+
+<article class="post">
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title | escape }}</h1>
+    <p class="post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>
+      {% if page.author %}
+        • <span class="post-author">{{ page.author | escape }}</span>
+      {% endif %}
+      {% if page.categories %}
+        {% comment %} Check if categories is a list (array) or single string {% endcomment %}
+        {% assign category_list = "" %}
+        {% if page.categories contains "," %}
+            {% assign category_list = page.categories | split: ", " | join: ", " %}
+        {% elsif page.categories.class == Array or page.categories.class == "Array" %}
+             {% assign category_list = page.categories | join: ", " %}
+        {% else %}
+             {% assign category_list = page.categories %}
+        {% endif %}
+        • <span class="post-categories">Categories: {{ category_list | escape }}</span>
+      {% endif %}
+    </p>
+  </header>
+
+  <div class="post-content">
+    {{ content }} </div>
+
+  <hr style="margin: 40px 0 20px 0;">
+  <nav class="post-navigation">
+      {% if page.previous.url %}
+        <a href="{{ page.previous.url | relative_url }}" class="prev-post" title="Previous Post: {{ page.previous.title | escape }}">&laquo; Previous: {{ page.previous.title | truncatewords: 5 | escape }}</a>
+      {% else %}
+        <span>&nbsp;</span> {# Placeholder to keep spacing consistent #}
+      {% endif %}
+      {% if page.next.url %}
+        <a href="{{ page.next.url | relative_url }}" class="next-post" title="Next Post: {{ page.next.title | escape }}">Next: {{ page.next.title | truncatewords: 5 | escape }} &raquo;</a>
+      {% endif %}
+   </nav>
+
+</article>
