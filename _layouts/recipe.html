@@ -24,8 +24,13 @@ layout: default # Inherits header/footer
             <div class="recipe-tags">
                 <strong>Tags:</strong>
                 {% for tag in page.tags %}
-                  <span class="tag">{{ tag | escape }}</span>
-                {% endfor %}
+                  {% comment %} Generate link using the permalink structure from _config.yml {% endcomment %}
+                  {% assign tag_slug = tag | slugify %} {# Convert tag name to URL-friendly format #}
+                  {% assign tag_url = "/recipes/tags/" | append: tag_slug | relative_url %}
+                  {% comment %} Wrap the existing span in an anchor (link) tag {% endcomment %}
+                  <a href="{{ tag_url }}" class="tag-link" title="View all recipes tagged '{{ tag | escape }}'">
+                     <span class="tag">{{ tag | escape }}</span>
+                  </a>
             </div>
           {% endif %}
       </div>
