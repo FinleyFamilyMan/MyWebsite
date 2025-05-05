@@ -21,6 +21,10 @@ collections:
     output: true # Generate individual pages for each album
     sort_by: date # Sort albums by date (requires date in front matter)
     permalink: /albums/:title/ # URL structure for album pages
+  recipes: # Add this new block for recipes
+    output: true # Generate individual pages for each recipe
+    sort_by: title # Default sort alphabetically by title
+    permalink: /recipes/:title/ # URL structure like /MyWebsite/recipes/grandmas-cookies/
 
 # Exclude from processing
 # exclude:
