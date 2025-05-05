@@ -13,7 +13,7 @@ permalink: /blog/
   {% assign posts_exist = false %}
   {% for post in site.posts %}
     {% assign posts_exist = true %}
-    <article class="post-preview-item event-item"> {# Reusing event-item style for card look #}
+    <article class="post-preview-item event-item">
       <header>
           <h2 class="post-preview-title">
             <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
