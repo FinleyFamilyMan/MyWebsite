@@ -1,0 +1,75 @@
+---
+layout: default # Inherits header/footer
+---
+
+<article class="recipe-page">
+  <header class="page-heading">
+    <h1>{{ page.title | escape }}</h1>
+    {% if page.description %}
+      <p>{{ page.description | escape }}</p>
+    {% endif %}
+  </header>
+
+  <div class="recipe-meta-container">
+      {% if page.image %}
+      <div class="recipe-main-image">
+        <img src="{{ page.image | relative_url }}" alt="{{ page.title | escape }}" loading="lazy">
+      </div>
+      {% endif %}
+      <div class="recipe-details">
+          {% if page.prep_time %}<span><strong>Prep:</strong> {{ page.prep_time }}</span>{% endif %}
+          {% if page.cook_time %}<span><strong>Cook:</strong> {{ page.cook_time }}</span>{% endif %}
+          {% if page.servings %}<span><strong>Servings:</strong> {{ page.servings }}</span>{% endif %}
+          {% if page.tags %}
+            <div class="recipe-tags">
+                <strong>Tags:</strong>
+                {% for tag in page.tags %}
+                  <span class="tag">{{ tag | escape }}</span>
+                {% endfor %}
+            </div>
+          {% endif %}
+      </div>
+  </div>
+
+
+  <div class="recipe-body">
+    <section class="recipe-ingredients">
+      <h2>Ingredients</h2>
+      {% if page.ingredients and page.ingredients.size > 0 %}
+        <ul>
+          {% for item in page.ingredients %}
+            <li>{{ item | markdownify | remove: '<p>' | remove: '</p>' }}</li> {# Process as markdown for bold/italic, remove potential wrapping p tags #}
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>Ingredients not listed.</p>
+      {% endif %}
+    </section>
+
+    <section class="recipe-instructions">
+      <h2>Instructions</h2>
+      {% if page.instructions and page.instructions.size > 0 %}
+        <ol>
+          {% for step in page.instructions %}
+             <li>{{ step | markdownify | remove: '<p>' | remove: '</p>' }}</li>
+          {% endfor %}
+        </ol>
+      {% else %}
+        <p>Instructions not listed.</p>
+      {% endif %}
+    </section>
+  </div>
+
+  {% if page.content != "" %} {# Display content from below --- if it exists #}
+    <section class="recipe-notes">
+      <h2>Notes</h2>
+      {{ content | markdownify }} {# Process notes as markdown #}
+    </section>
+  {% endif %}
+
+
+  <p style="text-align: center; margin-top: 30px;">
+    <a href="{{ "/recipes/" | relative_url }}" class="read-more-btn" style="background-color: #007bff; text-decoration: none;">&laquo; Back to All Recipes</a>
+  </p>
+
+</article>
