@@ -15,7 +15,7 @@ permalink: /photos/
 
   {% if sorted_albums.size > 0 %}
     {% for album in sorted_albums %}
-      <article class="album-preview-item event-item"> {# Reuse card style #}
+      <article class="album-preview-item event-item"> 
         <header>
           <h2 class="album-preview-title">
             <a href="{{ album.url | relative_url }}">{{ album.title | escape }}</a>
