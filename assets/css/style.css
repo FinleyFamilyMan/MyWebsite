@@ -817,3 +817,30 @@ footer {
  .layout-tag_page .page-heading p a:hover {
     text-decoration: underline;
  }
+
+/* === Recipe Page Tag Link Styling === */
+
+/* Style for the tag links within the recipe meta details */
+.recipe-details .recipe-meta-tag-link {
+  text-decoration: none; /* No underline */
+  color: #006400; /* Dark Green text */
+  /* Reset any potential styles inherited from other link classes */
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: inline; /* Display like normal text */
+  font-weight: normal; /* Not bold unless surrounding text is */
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.recipe-details .recipe-meta-tag-link:hover {
+  text-decoration: underline; /* Underline on hover */
+  color: #2E8B57; /* Slightly different green on hover */
+}
+
+/* Make sure the .tag class styles (used on /tags/ page) don't conflict */
+.recipe-details .tag { /* We removed the span, this is likely not needed now */
+   /* Reset styles if span was used */
+}
