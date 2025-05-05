@@ -2,7 +2,7 @@
 title: The Finley Family Website
 description: "Our little corner of the internet."
 baseurl: "" # Keep this empty if using username.github.io repo name
-url: "https://your-username.github.io" # Replace with your site URL
+url: "https://finleyfamilyman.github.io/MyWebsite/" # Replace with your site URL
 
 # Use Georgia Font (we'll implement this fully in CSS)
 font: "Georgia, serif"
