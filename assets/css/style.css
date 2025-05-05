@@ -485,8 +485,9 @@ footer {
 
 .album-photos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Responsive grid */
-    gap: 15px; /* Gap between photos */
+    /* grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); */ /* OLD */
+    grid-template-columns: repeat(3, 1fr); /* NEW: Fixed 3 columns */
+    gap: 20px; /* Slightly larger gap for 3 columns */
 }
 
 .album-photo-item {
@@ -503,13 +504,15 @@ footer {
 
 .album-photo-item img {
     max-width: 100%;
-    height: 150px; /* Fixed height for consistency */
-    object-fit: cover; /* Use cover to fill space nicely */
+    height: 180px; /* Increase height slightly for 3 columns */
+    object-fit: cover;
+    /* keep rest of properties */
     display: block;
-    margin: 0 auto 10px auto; /* Center image */
+    margin: 0 auto 10px auto;
     border-radius: 4px;
-    background-color: #f0f0f0; /* BG for placeholder */
+    background-color: #e9e9e9;
 }
+
 .album-photo-item a {
     display: block;
     text-decoration: none;
