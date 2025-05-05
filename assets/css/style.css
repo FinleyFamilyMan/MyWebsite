@@ -725,3 +725,93 @@ footer {
 .recipe-notes p:last-child {
     margin-bottom: 0;
 }
+
+
+/* === Tag Filtering Styles === */
+
+/* Button on main Recipes page */
+.filter-button-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.filter-tag-btn {
+  display: inline-block;
+  background-color: #007bff; /* Blue button */
+  color: white !important;
+  padding: 10px 20px;
+  border-radius: 20px; /* Pill shape */
+  text-decoration: none !important;
+  font-weight: bold;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.filter-tag-btn:hover {
+  background-color: #0056b3; /* Darker blue */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Styling for the main Tags list page (tags.md) */
+.tag-list-container {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f8f9fa; /* Light background */
+  border-radius: 8px;
+}
+
+.tag-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap; /* Allow tags to wrap */
+  gap: 15px; /* Space between tags */
+  justify-content: center; /* Center tags */
+}
+
+.tag-list li {
+  /* Each li contains one tag link */
+}
+
+.tag-link {
+  display: block;
+  padding: 8px 18px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 18px; /* Pill shape */
+  text-decoration: none;
+  color: #006400; /* Dark green */
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.tag-link:hover {
+  background-color: #90EE90; /* Light green background */
+  color: #0056b3; /* Blue text */
+  border-color: #3CB371; /* Medium sea green border */
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Styling for the individual tag pages (layout: tag_page.html) */
+/* Uses .page-heading (already styled) */
+/* Uses .recipe-list-container (already styled) */
+/* Uses recipe_preview_card include (already styled) */
+
+/* Add specific styles if needed, e.g., adjust heading size */
+.layout-tag_page .page-heading h1 { /* Target h1 only on tag pages */
+   font-size: 1.8em; /* Slightly smaller than main recipe page h1 */
+}
+.layout-tag_page .page-heading p {
+    font-size: 1em;
+    color: #666;
+}
+.layout-tag_page .page-heading p a {
+    color: #007bff;
+    text-decoration: none;
+}
+ .layout-tag_page .page-heading p a:hover {
+    text-decoration: underline;
+ }
