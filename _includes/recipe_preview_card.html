@@ -1,5 +1,5 @@
 <article class="recipe-preview-item event-item">
-  {% assign recipe = include.recipe %} {# Get the recipe object passed to the include #}
+  {% assign recipe = include.recipe %} 
   {% if recipe.image %}
   <a href="{{ recipe.url | relative_url }}" class="recipe-preview-image-link">
     <img src="{{ recipe.image | relative_url }}" alt="{{ recipe.title | escape }}" class="recipe-preview-image" loading="lazy">
