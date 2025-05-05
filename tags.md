@@ -16,13 +16,13 @@ permalink: /tags/ # Sets the URL for this page to /MyWebsite/tags/
     The 'jekyll-archives' plugin populates site.tags with tag names mapped to posts.
     We just need the names (keys) here.
   {% endcomment %}
-  {% assign recipe_tags = "" | split: "," %} {# Initialize empty array #}
+  {% assign recipe_tags = "" | split: "," %}
   {% for recipe in site.recipes %}
     {% for tag in recipe.tags %}
       {% assign recipe_tags = recipe_tags | push: tag | uniq %}
     {% endfor %}
   {% endfor %}
-  {% assign sorted_tags = recipe_tags | sort_natural %} {# Sort alphabetically, case-insensitive #}
+  {% assign sorted_tags = recipe_tags | sort_natural %} 
 
   {% if sorted_tags.size > 0 %}
     <ul class="tag-list">
