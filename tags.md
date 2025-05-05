@@ -1,4 +1,3 @@
-{% raw %}
 ---
 layout: default
 title: Recipe Tags
@@ -37,4 +36,3 @@ permalink: /tags/ # Sets the URL for this page to /MyWebsite/tags/
     <p>No recipe tags found.</p>
   {% endif %}
 </div>
-{% endraw %}
