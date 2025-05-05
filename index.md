@@ -16,9 +16,9 @@ title: Home
     <h2>Latest Blog Post</h2>
     {% assign latest_post = site.posts | first %}
     {% if latest_post %}
-      <article class="post-preview-item event-item" style="flex: 1 1 100%; background-color: #fff; border: none; padding: 0;"> {# Use full width & remove card bg/border for home page preview #}
+      <article class="post-preview-item event-item" style="flex: 1 1 100%; background-color: #fff; border: none; padding: 0;">
           <header>
-              <h3 class="post-preview-title" style="font-size: 1.6em;"> {# Make title slightly larger here #}
+              <h3 class="post-preview-title" style="font-size: 1.6em;">
                 <a href="{{ latest_post.url | relative_url }}">{{ latest_post.title | escape }}</a>
               </h3>
               <p class="post-meta">
