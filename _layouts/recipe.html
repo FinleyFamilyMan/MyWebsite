@@ -38,7 +38,7 @@ layout: default # Inherits header/footer
       {% if page.ingredients and page.ingredients.size > 0 %}
         <ul>
           {% for item in page.ingredients %}
-            <li>{{ item | markdownify | remove: '<p>' | remove: '</p>' }}</li> {# Process as markdown for bold/italic, remove potential wrapping p tags #}
+            <li>{{ item | markdownify | remove: '<p>' | remove: '</p>' }}</li>
           {% endfor %}
         </ul>
       {% else %}
@@ -60,10 +60,10 @@ layout: default # Inherits header/footer
     </section>
   </div>
 
-  {% if page.content != "" %} {# Display content from below --- if it exists #}
+  {% if page.content != "" %}
     <section class="recipe-notes">
       <h2>Notes</h2>
-      {{ content | markdownify }} {# Process notes as markdown #}
+      {{ content | markdownify }} 
     </section>
   {% endif %}
 
