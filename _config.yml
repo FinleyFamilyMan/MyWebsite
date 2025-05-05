@@ -11,9 +11,18 @@ font: "Georgia, serif"
 
 # Build settings
 markdown: kramdown
-theme: minima # We'll override this with our custom styles, but it provides a base structure
-plugins:
+theme: minima
+plugins: # Add jekyll-archives here
   - jekyll-feed
+  - jekyll-archives # Make sure this is listed
+
+# Jekyll Archives configuration (Add this whole block)
+jekyll-archives:
+  enabled:
+    - tags # Enable archive generation for tags
+  layout: tag_page # The layout file to use for tag pages (we'll create this)
+  permalinks:
+    tag: '/recipes/tags/:name/' # URL structure for tag pages
 
 # Collections Configuration
 collections:
