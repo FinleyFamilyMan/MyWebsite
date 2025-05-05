@@ -15,7 +15,7 @@ permalink: /recipes/
 
   {% if sorted_recipes.size > 0 %}
     {% for recipe in sorted_recipes %}
-      <article class="recipe-preview-item event-item"> {# Reuse card style #}
+      <article class="recipe-preview-item event-item"> 
         {% if recipe.image %}
         <a href="{{ recipe.url | relative_url }}" class="recipe-preview-image-link">
           <img src="{{ recipe.image | relative_url }}" alt="{{ recipe.title | escape }}" class="recipe-preview-image" loading="lazy">
