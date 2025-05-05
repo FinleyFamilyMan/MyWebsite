@@ -1,0 +1,25 @@
+{% raw %}
+---
+layout: default # Inherits header/footer
+# Note: Title is automatically set by jekyll-archives to the tag name
+---
+
+<div class="page-heading">
+  <h1>Recipes Tagged: "{{ page.title | escape }}"</h1>
+  <p><a href="{{ "/tags/" | relative_url }}">&laquo; View All Tags</a> | <a href="{{ "/recipes/" | relative_url }}">View All Recipes &raquo;</a></p>
+</div>
+
+<div class="recipe-list-container two-column-layout">
+  {% comment %} jekyll-archives provides the filtered posts in page.posts {% endcomment %}
+  {% assign recipes_for_tag = page.posts | sort: 'title' %}
+
+  {% if recipes_for_tag.size > 0 %}
+    {% for recipe in recipes_for_tag %}
+      {% comment %} Include the same recipe preview card used on the main recipes page {% endcomment %}
+      {% include recipe_preview_card.html recipe=recipe %}
+    {% endfor %}
+  {% else %}
+    <p style="text-align: center; width: 100%;">No recipes found with the tag "{{ page.title | escape }}".</p>
+  {% endif %}
+</div>
+{% endraw %}
