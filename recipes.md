@@ -1,4 +1,3 @@
-{% raw %}
 ---
 layout: default
 title: Recipes
@@ -26,4 +25,3 @@ permalink: /recipes/
     <p style="text-align: center; width: 100%;">No recipes found yet! Add some `.md` files to the `_recipes` directory.</p>
   {% endif %}
 </div>
-{% endraw %}
