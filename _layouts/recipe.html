@@ -27,8 +27,11 @@ layout: default # Inherits header/footer
                 {% for tag in page.tags %}
                   {% assign tag_slug = tag | slugify %}
                   {% assign tag_url = "/recipes/tags/" | append: tag_slug | relative_url %}
-                  <a href="{{ tag_url }}" class="recipe-meta-tag-link" title="View all recipes tagged '{{ tag | escape }}'">{{ tag | escape }}</a>{% unless forloop.last %}, {% endunless %}{% comment %} Add comma unless it's the last tag {% endcomment %}
-                {% endfor %} 
+                  {% comment %} Link wraps the styled span tag {% endcomment %}
+                  <a href="{{ tag_url }}" class="recipe-tag-wrapper-link" title="View all recipes tagged '{{ tag | escape }}'">
+                    <span class="tag">{{ tag | escape }}</span> {# Reuse .tag class style #}
+                  </a>
+              {% endfor %} 
             </div>
           {% endif %} 
           {% comment %} Corrected Tag Section End {% endcomment %}
