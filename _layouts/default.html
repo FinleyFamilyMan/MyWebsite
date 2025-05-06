@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | default: site.title }}</title>
     <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
-    </head>
+</head>
 <body>
     <header>
         <h1>{{ site.title }}</h1>
@@ -13,16 +13,18 @@
             <a href="{{ "/" | relative_url }}" {% if page.url == "/" %}class="active"{% endif %}>Home</a>
             <a href="{{ "/photos/" | relative_url }}" {% if page.url == "/photos/" or page.url contains "/albums/" %}class="active"{% endif %}>Photos</a>
             <a href="{{ "/blog/" | relative_url }}" {% if page.url == "/blog/" or page.layout == "post" %}class="active"{% endif %}>Blog</a>
-            <a href="{{ "/recipes/" | relative_url }}" {% if page.url == "/recipes/" or page.layout == "recipe" %}class="active"{% endif %}>Recipes</a>
+            <a href="{{ "/recipes/" | relative_url }}" {% if page.url == "/recipes/" or page.url == "/tags/" or page.layout == "recipe" or page.layout == "tag_page" %}class="active"{% endif %}>Recipes</a>
         </nav>
     </header>
 
     <main>
         <div class="content-wrapper">
-            {{ content }} </div>
+            {{ content }}
+        </div>
     </main>
 
     <footer>
+        &copy; 2024 Finley Family
         <div class="silly-button-container">
           <button id="dont-push-button">Don't push this</button>
           <div id="silly-image-popup" class="silly-image-popup" style="display: none;">
@@ -30,7 +32,42 @@
             <button id="close-silly-popup">Close</button>
           </div>
         </div>
-    </body> 
     </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const sillyButton = document.getElementById('dont-push-button');
+        const sillyPopup = document.getElementById('silly-image-popup');
+        const closeButton = document.getElementById('close-silly-popup');
+        const sillyImage = document.getElementById('silly-image'); // Get image element
+
+        // Function to update the image source (you'll call this when you have the real image)
+        // function setSillyImageSource(newSrc) {
+        //   if (sillyImage) {
+        //     sillyImage.src = newSrc;
+        //   }
+        // }
+        // Example usage later (don't uncomment now):
+        // setSillyImageSource("{{ '/assets/images/your-actual-silly-image.gif' | relative_url }}");
+
+
+        if (sillyButton && sillyPopup && closeButton) {
+          sillyButton.addEventListener('click', function() {
+            sillyPopup.style.display = 'flex'; // Show the popup
+          });
+
+          closeButton.addEventListener('click', function() {
+            sillyPopup.style.display = 'none'; // Hide the popup
+          });
+
+          // Optional: Click outside the image (on the semi-transparent background) to close
+          sillyPopup.addEventListener('click', function(event) {
+             if (event.target === sillyPopup) { // Clicked on background, not image/button
+                sillyPopup.style.display = 'none';
+             }
+          });
+        }
+      });
+    </script>
 </body>
 </html>
