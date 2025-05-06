@@ -14,15 +14,6 @@ markdown: kramdown
 theme: minima
 plugins: # Ensure correct indentation with standard spaces
   - jekyll-feed        # 2 standard spaces
-  - jekyll-archives    # 2 standard spaces
-
-# Jekyll Archives configuration (Ensure correct indentation with standard spaces)
-jekyll-archives:
-  enabled:             # 2 standard spaces
-    - tags             # 4 standard spaces
-  layout: tag_page     # 2 standard spaces
-  permalinks:          # 2 standard spaces
-    tag: '/recipes/tags/:name/' # 4 standard spaces
 
 # Collections Configuration (Ensure correct indentation with standard spaces)
 collections:
