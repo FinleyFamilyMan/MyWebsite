@@ -1,23 +1,42 @@
 ---
-layout: default # Inherits header/footer
-# Note: Title is automatically set by jekyll-archives to the tag name
+layout: default
 ---
 
 <div class="page-heading">
-  <h1>Recipes Tagged: "{{ page.title | escape }}"</h1>
-  <p><a href="{{ "/tags/" | relative_url }}">&laquo; View All Tags</a> | <a href="{{ "/recipes/" | relative_url }}">View All Recipes &raquo;</a></p>
+  <h1>{{ page.title | escape }}</h1> {# This title comes from the front matter of your tag files like dessert.md #}
+  <p>
+    <a href="{{ "/tags/" | relative_url }}">&laquo; View All Tags</a> | 
+    <a href="{{ "/recipes/" | relative_url }}">View All Recipes &raquo;</a>
+  </p>
 </div>
 
 <div class="recipe-list-container two-column-layout">
-  {% comment %} jekyll-archives provides the filtered posts in page.posts {% endcomment %}
-  {% assign recipes_for_tag = page.posts | sort: 'title' %}
+  {% comment %} --- Pure Jekyll Recipe Filtering Logic --- {% endcomment %}
+  {% assign recipes_for_tag = "" | split: "," %} {# Initialize empty array #}
+  {% assign current_page_tag = page.tag | downcase %} {# Get tag from this page's front matter (e.g., 'dessert') and lowercase it #}
+
+  {% for recipe in site.recipes %}
+    {% assign recipe_has_tag = false %}
+    {% for tag_in_recipe in recipe.tags %}
+      {% if (tag_in_recipe | downcase) == current_page_tag %}
+        {% assign recipe_has_tag = true %}
+        {% break %} {# Exit inner loop once tag is found for this recipe #}
+      {% endif %}
+    {% endfor %}
+    
+    {% if recipe_has_tag %}
+      {% assign recipes_for_tag = recipes_for_tag | push: recipe %}
+    {% endif %}
+  {% endfor %}
+
+  {% assign recipes_for_tag = recipes_for_tag | sort: 'title' %} {# Sort the filtered recipes alphabetically #}
+  {% comment %} --- End Pure Jekyll Recipe Filtering Logic --- {% endcomment %}
 
   {% if recipes_for_tag.size > 0 %}
     {% for recipe in recipes_for_tag %}
-      {% comment %} Include the same recipe preview card used on the main recipes page {% endcomment %}
       {% include recipe_preview_card.html recipe=recipe %}
     {% endfor %}
   {% else %}
-    <p style="text-align: center; width: 100%;">No recipes found with the tag "{{ page.title | escape }}".</p>
+    <p style="text-align: center; width: 100%;">No recipes found with the tag "{{ page.tag | escape }}".</p>
   {% endif %}
 </div>
