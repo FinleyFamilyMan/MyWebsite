@@ -656,20 +656,20 @@ footer {
     margin-top: 15px; /* More space above tags */
 }
 .recipe-tags strong { display: block; margin-bottom: 8px; font-size: 1em; color: #444; }
-.recipe-tags .tag {
-    display: inline-block;
-    background-color: #e0e0e0;
-    padding: 4px 10px; /* Slightly larger tags */
-    border-radius: 15px; /* More rounded */
-    font-size: 0.85em;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    color: #555;
-    transition: background-color 0.3s ease;
-}
-.recipe-tags .tag:hover {
-    background-color: #ccc; /* Darker on hover */
-}
+/* .recipe-tags .tag { */ /* Commented out previous attempt */
+   /* display: inline-block; */
+   /* background-color: #e0e0e0; */
+   /* padding: 4px 10px; */
+   /* border-radius: 15px; */
+   /* font-size: 0.85em; */
+   /* margin-right: 5px; */
+   /* margin-bottom: 5px; */
+   /* color: #555; */
+   /* transition: background-color 0.3s ease; */
+/* } */
+/* .recipe-tags .tag:hover { */ /* Commented out previous attempt */
+   /* background-color: #ccc; */
+/* } */
 
 
 .recipe-body {
@@ -818,29 +818,49 @@ footer {
     text-decoration: underline;
  }
 
-/* === Recipe Page Tag Link Styling === */
+/* === Recipe Page Tag Link Styling (Revised) === */
+/* Styles for the clickable tags shown in the meta details on individual recipe pages */
 
-/* Style for the tag links within the recipe meta details */
-.recipe-details .recipe-meta-tag-link {
-  text-decoration: none; /* No underline */
-  color: #006400; /* Dark Green text */
-  /* Reset any potential styles inherited from other link classes */
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  display: inline; /* Display like normal text */
-  font-weight: normal; /* Not bold unless surrounding text is */
-  border-radius: 0;
-  box-shadow: none;
+/* Style for the wrapper link (<a> tag) around each tag span */
+/* We want the link itself to be mostly invisible, inheriting text styles */
+.recipe-details .recipe-tag-wrapper-link {
+ text-decoration: none; /* Remove underline from link */
+ color: inherit; /* Link color should match surrounding text */
+ display: inline-block; /* Allows margin/padding and prevents breaking weirdly */
+ margin-right: 6px; /* Space between tags */
+ margin-bottom: 6px; /* Space if tags wrap to the next line */
+ /* Resetting potential unwanted link styles */
+ background: none;
+ border: none;
+ padding: 0;
+ font-weight: inherit;
+ border-radius: 0;
+ box-shadow: none;
+}
+/* No special hover effect needed on the link wrapper itself */
+.recipe-details .recipe-tag-wrapper-link:hover { }
+
+/* Style the <span class="tag"> *inside* the link within recipe-details */
+/* This creates the desired pill shape with accent */
+.recipe-details .tag {
+ display: inline-block; /* Necessary for padding/border */
+ background-color: #f0f8f0; /* Very light green/honeydew background */
+ padding: 4px 10px 4px 8px; /* top right bottom left padding */
+ border-radius: 15px; /* Pill shape */
+ font-size: 0.85em; /* Small text size */
+ color: #006400; /* Dark green text */
+ border-left: 5px solid #90EE90; /* Light green accent border on the left */
+ transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; /* Smooth hover transition */
+ line-height: 1.4; /* Adjust vertical alignment if needed */
+ cursor: pointer; /* Show pointer cursor since it's clickable */
 }
 
-.recipe-details .recipe-meta-tag-link:hover {
-  text-decoration: underline; /* Underline on hover */
-  color: #2E8B57; /* Slightly different green on hover */
+/* Hover effect: Change the span's style when the wrapping link is hovered */
+.recipe-details .recipe-tag-wrapper-link:hover .tag {
+ background-color: #90EE90; /* Light green background */
+ color: #0056b3; /* Blue text */
+ border-color: #3CB371; /* Medium sea green border */
 }
 
-/* Make sure the .tag class styles (used on /tags/ page) don't conflict */
-.recipe-details .tag { /* We removed the span, this is likely not needed now */
-   /* Reset styles if span was used */
-}
+/* Note: Styles for '.tag-list .tag-link' (used on the main /tags/ page) */
+/* remain separate and should not be affected by these '.recipe-details' specific rules. */
