@@ -1,10 +1,10 @@
+# Corrected _config.yml content (using standard spaces)
+
 # Basic Site Settings
 title: The Finley Family Website
 description: "Our little corner of the internet."
-# The main domain part ONLY (no subdirectory here)
-url: "https://finleyfamilyman.github.io"
-# The subdirectory your site lives in (starts with a slash!)
-baseurl: "/MyWebsite"
+url: "https://finleyfamilyman.github.io" # Main domain
+baseurl: "/MyWebsite" # Site subdirectory
 
 # Use Georgia Font (we'll implement this fully in CSS)
 font: "Georgia, serif"
@@ -12,28 +12,28 @@ font: "Georgia, serif"
 # Build settings
 markdown: kramdown
 theme: minima
-plugins: # Use standard spaces for indentation
-  - jekyll-feed
-  - jekyll-archives # Indented with 2 standard spaces
+plugins: # Ensure correct indentation with standard spaces
+  - jekyll-feed        # 2 standard spaces
+  - jekyll-archives    # 2 standard spaces
 
-# Jekyll Archives configuration (Use standard spaces for indentation)
+# Jekyll Archives configuration (Ensure correct indentation with standard spaces)
 jekyll-archives:
-  enabled: # Indented with 2 standard spaces
-    - tags # Indented with 4 standard spaces
-  layout: tag_page # Indented with 2 standard spaces
-  permalinks: # Indented with 2 standard spaces
-    tag: '/recipes/tags/:name/' # Indented with 4 standard spaces
+  enabled:             # 2 standard spaces
+    - tags             # 4 standard spaces
+  layout: tag_page     # 2 standard spaces
+  permalinks:          # 2 standard spaces
+    tag: '/recipes/tags/:name/' # 4 standard spaces
 
-# Collections Configuration (Ensure standard spaces here too)
+# Collections Configuration (Ensure correct indentation with standard spaces)
 collections:
-  albums: # Indented with 2 standard spaces
-    output: true # Indented with 4 standard spaces
-    sort_by: date # Indented with 4 standard spaces
-    permalink: /albums/:title/ # Indented with 4 standard spaces
-  recipes: # Indented with 2 standard spaces
-    output: true # Indented with 4 standard spaces
-    sort_by: title # Indented with 4 standard spaces
-    permalink: /recipes/:title/ # Indented with 4 standard spaces
+  albums:              # 2 standard spaces
+    output: true       # 4 standard spaces
+    sort_by: date      # 4 standard spaces
+    permalink: /albums/:title/ # 4 standard spaces
+  recipes:             # 2 standard spaces
+    output: true       # 4 standard spaces
+    sort_by: title     # 4 standard spaces
+    permalink: /recipes/:title/ # 4 standard spaces
 
 # Exclude from processing
 # exclude:
