@@ -9,6 +9,5 @@ gem "jekyll-feed", "~> 0.12"
 group :jekyll_plugins do
   gem "jekyll-paginate", "~> 1.1"  # 2 standard spaces indentation
   gem "jekyll-sitemap", "~> 1.4"    # 2 standard spaces indentation
-  gem "jekyll-archives"             # 2 standard spaces indentation
   # Add other plugins if you use them
 end
