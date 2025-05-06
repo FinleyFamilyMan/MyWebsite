@@ -864,3 +864,64 @@ footer {
 
 /* Note: Styles for '.tag-list .tag-link' (used on the main /tags/ page) */
 /* remain separate and should not be affected by these '.recipe-details' specific rules. */
+
+/* === Silly Footer Button Styles === */
+.silly-button-container {
+  position: fixed; /* Position relative to viewport */
+  bottom: 10px; /* Distance from bottom */
+  right: 15px; /* Distance from right */
+  z-index: 100; /* Ensure it's above footer */
+}
+
+#dont-push-button {
+  background-color: #ffc107; /* Warning yellow */
+  color: #333;
+  border: 1px solid #d39e00;
+  padding: 3px 8px; /* Small padding */
+  font-size: 0.75em; /* Small font */
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  transition: background-color 0.2s ease;
+}
+
+#dont-push-button:hover {
+  background-color: #e0a800;
+}
+
+.silly-image-popup {
+  display: none; /* Hidden by default */
+  position: fixed; /* Overlay */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  z-index: 1000; /* Above everything */
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Stack image and close button */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.silly-image-popup img {
+  max-width: 90%;
+  max-height: 80%;
+  object-fit: contain;
+  border: 3px solid white;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+#close-silly-popup {
+  margin-top: 15px;
+  padding: 8px 15px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+#close-silly-popup:hover {
+  background-color: #ddd;
+}
