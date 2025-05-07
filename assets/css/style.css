@@ -87,6 +87,9 @@ footer {
     color: #555;
     border-top: 1px solid #ccc;
     margin-top: auto; /* Pushes footer to bottom */
+    display: flex; /* ADDED */
+    justify-content: space-between; /* ADDED */
+    align-items: center; /* ADDED */
 }
 
 /* === Styles for Home Page Layout === */
@@ -867,10 +870,9 @@ footer {
 
 /* === Silly Footer Button Styles === */
 .silly-button-container {
-  position: fixed; /* Position relative to viewport */
-  bottom: 10px; /* Distance from bottom */
-  right: 15px; /* Distance from right */
-  z-index: 100; /* Ensure it's above footer */
+  /* Removed position: fixed; bottom; right; z-index; */
+  /* Button will now be aligned by footer's flexbox */
+  margin-left: 20px; /* Add some space if needed from the copyright */
 }
 
 #dont-push-button {
