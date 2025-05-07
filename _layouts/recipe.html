@@ -29,7 +29,7 @@ layout: default # Inherits header/footer
                   {% assign tag_url = "/recipes/tags/" | append: tag_slug | relative_url %}
                   {% comment %} Link wraps the styled span tag {% endcomment %}
                   <a href="{{ tag_url }}" class="recipe-tag-wrapper-link" title="View all recipes tagged '{{ tag | escape }}'">
-                    <span class="tag">{{ tag | escape }}</span> {# Reuse .tag class style #}
+                    <span class="tag">{{ tag | escape }}</span>
                   </a>
               {% endfor %} 
             </div>
