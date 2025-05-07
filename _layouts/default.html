@@ -23,16 +23,16 @@
         </div>
     </main>
 
-    <footer>
-        &copy; 2024 Finley Family
-        <div class="silly-button-container">
-          <button id="dont-push-button">Don't push this</button>
-          <div id="silly-image-popup" class="silly-image-popup" style="display: none;">
-            <img id="silly-image" src="{{ '/assets/images/silly-placeholder.gif' | relative_url }}" alt="Surprise!">
-            <button id="close-silly-popup">Close</button>
-          </div>
-        </div>
-    </footer>
+<footer>
+    <span>&copy; 2024 Finley Family</span> {# Wrapped in span #}
+    <div class="silly-button-container">
+      <button id="dont-push-button">Don't push this</button>
+      <div id="silly-image-popup" class="silly-image-popup" style="display: none;">
+        <img id="silly-image" src="{{ '/assets/images/silly-placeholder.gif' | relative_url }}" alt="Surprise!">
+        <button id="close-silly-popup">Close</button>
+      </div>
+    </div>
+</footer>
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
