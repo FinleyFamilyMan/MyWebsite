@@ -10,33 +10,35 @@ layout: default
   </p>
 </div>
 
-<div class="recipe-list-container two-column-layout">
-  {% comment %} --- Pure Jekyll Recipe Filtering Logic --- {% endcomment %}
-  {% assign recipes_for_tag = "" | split: "," %} {# Initialize empty array #}
-  {% assign current_page_tag = page.tag | downcase %} {# Get tag from this page's front matter (e.g., 'dessert') and lowercase it #}
+{% comment %} Inside <div class="recipe-list-container two-column-layout"> {% endcomment %}
 
-  {% for recipe in site.recipes %}
-    {% assign recipe_has_tag = false %}
-    {% for tag_in_recipe in recipe.tags %}
-      {% if (tag_in_recipe | downcase) == current_page_tag %}
-        {% assign recipe_has_tag = true %}
+  {% comment %} --- CORRECTED Pure Jekyll Recipe Filtering Logic --- {% endcomment %}
+  {% assign recipes_for_tag_filtered = "" | split: "," %} {# Initialize empty array for filtered results #}
+  {% assign current_page_tag_value = page.tag | strip | downcase %} {# Get tag from this page's front matter, strip whitespace, and lowercase it #}
+
+  {% for recipe_item in site.recipes %}
+    {% assign recipe_has_current_tag = false %}
+    {% for tag_in_recipe_item in recipe_item.tags %}
+      {% assign processed_tag_in_recipe = tag_in_recipe_item | strip | downcase %}
+      {% comment %} The 'if' condition below was the source of the Liquid error. Corrected. {% endcomment %}
+      {% if processed_tag_in_recipe == current_page_tag_value %}
+        {% assign recipe_has_current_tag = true %}
         {% break %} {# Exit inner loop once tag is found for this recipe #}
       {% endif %}
     {% endfor %}
     
-    {% if recipe_has_tag %}
-      {% assign recipes_for_tag = recipes_for_tag | push: recipe %}
+    {% if recipe_has_current_tag %}
+      {% assign recipes_for_tag_filtered = recipes_for_tag_filtered | push: recipe_item %}
     {% endif %}
   {% endfor %}
 
-  {% assign recipes_for_tag = recipes_for_tag | sort: 'title' %} {# Sort the filtered recipes alphabetically #}
-  {% comment %} --- End Pure Jekyll Recipe Filtering Logic --- {% endcomment %}
+  {% assign recipes_for_tag_sorted = recipes_for_tag_filtered | sort: 'title' %} {# Sort the filtered recipes alphabetically #}
 
-  {% if recipes_for_tag.size > 0 %}
-    {% for recipe in recipes_for_tag %}
-      {% include recipe_preview_card.html recipe=recipe %}
+  {% if recipes_for_tag_sorted.size > 0 %}
+    {% for recipe_card_item in recipes_for_tag_sorted %}
+       {% include recipe_preview_card.html recipe=recipe_card_item %}
     {% endfor %}
   {% else %}
     <p style="text-align: center; width: 100%;">No recipes found with the tag "{{ page.tag | escape }}".</p>
   {% endif %}
-</div>
+  {% comment %} --- End CORRECTED Pure Jekyll Recipe Filtering Logic --- {% endcomment %}
