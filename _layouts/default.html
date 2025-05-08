@@ -5,6 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | default: site.title }}</title>
     <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
+    <style>
+        /* === CSS for the "Don't Push This" Button Scare Effect === */
+        
+        /* Styles for the button itself (can be in your main style.css or here) */
+        /* This is assuming the .silly-button-container is positioned by the footer's flexbox */
+        .silly-button-container {
+          margin-left: 20px; /* Adjust as needed for spacing in footer */
+        }
+
+        #dont-push-button {
+          background-color: #ffc107; /* Yellow color */
+          color: #333; /* Dark text */
+          border: 1px solid #d39e00; /* Darker yellow border */
+          padding: 3px 8px; /* Small padding */
+          font-size: 0.75em; /* Small font */
+          border-radius: 4px; /* Slightly rounded corners */
+          cursor: pointer; /* Indicate it's clickable */
+          box-shadow: 1px 1px 3px rgba(0,0,0,0.2); /* Subtle shadow */
+          transition: background-color 0.2s ease; /* Smooth hover effect */
+        }
+
+        #dont-push-button:hover {
+          background-color: #e0a800; /* Darker yellow on hover */
+        }
+
+        /* Popup container - now just a transparent overlay trigger for the image */
+        .silly-image-popup {
+          display: none; /* Hidden by default */
+          position: fixed; /* Covers the whole screen */
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: transparent; /* No dark overlay for the scare effect */
+          z-index: 999; /* Layering: Below the image itself */
+          /* Centering for the fixed-position image is handled by the image's own styles */
+          pointer-events: none; /* Allows clicks to go "through" this transparent container */
+        }
+
+        /* Image styles for the scare effect */
+        #silly-image {
+          /* Initial state: small, centered, invisible */
+          position: fixed; /* Positioned relative to the viewport center */
+          top: 50%;
+          left: 50%;
+          
+          /* --- TUNABLE (CSS): Initial Size --- */
+          /* Starts at 10% of its actual size. Increase for a less "pop-from-nothing" feel. */
+          /* For a spookier effect, try a very small value like 0.05 or 0.01 */
+          transform: translate(-50%, -50%) scale(0.1); 
+          
+          opacity: 0; /* Start fully transparent */
+          
+          max-width: 90vw; /* Limit potential size based on viewport width */
+          max-height: 90vh; /* Limit potential size based on viewport height */
+          object-fit: contain; /* Ensures entire image is visible without cropping */
+          
+          border: 4px solid white; /* Optional: Adds a white border around the GIF */
+          box-shadow: 0 0 35px rgba(0,0,0,0.7); /* Optional: Adds a shadow for depth */
+          
+          z-index: 1000; /* Ensures image is above the transparent popup container and other content */
+          
+          /* --- TUNABLE (CSS): Animation Speed & Easing for Expansion/Shrinking --- */
+          /* 'transform' handles the scaling (expansion/shrinking). */
+          /* 'opacity' handles the fading in/out. */
+          /* Format: property <duration> <timing-function> */
+          /* For a spookier/faster effect, try shorter durations (e.g., 0.15s, 0.1s) */
+          /* Timing functions: 'ease-out' (smooth), 'ease-in' (starts slow, good for scares), 'linear' (constant) */
+          /* 'cubic-bezier(0.175, 0.885, 0.32, 1.5)' can give a bouncy/overshooting effect. */
+          transition: transform 0.15s ease-in, /* Example: Very fast transform */
+                      opacity 0.1s ease-in;   /* Example: Very fast opacity change */
+          
+          pointer-events: none; /* Image itself is not clickable by default */
+        }
+
+        /* State when image is visible and expanded */
+        #silly-image.visible {
+          /* --- TUNABLE (CSS): Final Expanded Size --- */
+          /* Scales to X times its original size (or constrained by max-width/height). */
+          /* Adjust '3.0' to make it bigger (e.g., 4.0) or smaller (e.g., 2.0) for impact. */
+          transform: translate(-50%, -50%) scale(3.5); /* Example: Gets quite large */
+          
+          opacity: 1; /* Fully visible */
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -23,84 +108,95 @@
         </div>
     </main>
 
-<footer>
-    <span>&copy; 2024 Finley Family</span> 
-    <div class="silly-button-container">
-      <button id="dont-push-button">Don't push this</button>
-      <div id="silly-image-popup" class="silly-image-popup" style="display: none;">
-        <img id="silly-image" src="{{ '/assets/images/silly-placeholder.gif' | relative_url }}" alt="Surprise!">
-        <button id="close-silly-popup">Close</button>
-      </div>
-    </div>
-</footer>
+    <footer>
+        <span>&copy; 2024 Finley Family</span>
+        <div class="silly-button-container">
+          <button id="dont-push-button">Don't push this</button>
+          <div id="silly-image-popup" class="silly-image-popup" style="display: none;">
+            <img id="silly-image" src="{{ '/assets/images/silly-placeholder.gif' | relative_url }}" alt="Surprise!">
+          </div>
+        </div>
+    </footer>
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
+        
+        // --- Logic for "Don't Push This" Button (Spooky Scare Effect) ---
         const sillyButton = document.getElementById('dont-push-button');
-        const sillyPopup = document.getElementById('silly-image-popup');
-        const closeButton = document.getElementById('close-silly-popup');
-        const sillyImage = document.getElementById('silly-image'); // Get image element
+        const sillyPopup = document.getElementById('silly-image-popup'); // Container div
+        const sillyImage = document.getElementById('silly-image');     // Image itself
+        let isShowingSillyImage = false; // Flag to prevent multiple clicks during animation
 
-        // Function to update the image source (you'll call this when you have the real image)
-        // function setSillyImageSource(newSrc) {
-        //   if (sillyImage) {
-        //     sillyImage.src = newSrc;
-        //   }
-        // }
-        // Example usage later (don't uncomment now):
-        // setSillyImageSource("{{ '/assets/images/your-actual-silly-image.gif' | relative_url }}");
-
-
-        if (sillyButton && sillyPopup && closeButton) {
+        if (sillyButton && sillyPopup && sillyImage) {
           sillyButton.addEventListener('click', function() {
-            sillyPopup.style.display = 'flex'; // Show the popup
-          });
+            if (isShowingSillyImage) return; // Don't do anything if animation is in progress
+            isShowingSillyImage = true;
 
-          closeButton.addEventListener('click', function() {
-            sillyPopup.style.display = 'none'; // Hide the popup
-          });
+            // --- TUNABLE (JS): Path to your Spooky GIF ---
+            // IMPORTANT: Replace 'silly-placeholder.gif' with your actual spooky GIF's filename.
+            // Make sure the GIF is in your 'assets/images/' folder.
+            const spookyImageSrc = "{{ '/assets/images/silly-placeholder.gif' | relative_url }}"; 
+            // Add cache-busting query string to force GIF to replay from the start each time
+            sillyImage.src = spookyImageSrc + "?t=" + new Date().getTime(); 
 
-          // Optional: Click outside the image (on the semi-transparent background) to close
-          sillyPopup.addEventListener('click', function(event) {
-             if (event.target === sillyPopup) { // Clicked on background, not image/button
-                sillyPopup.style.display = 'none';
-             }
+            sillyPopup.style.display = 'flex'; // Show the (transparent) popup container to hold the fixed image
+
+            // --- TUNABLE (JS): Delay before expansion starts (milliseconds) ---
+            // Short delay to ensure display:flex is applied before CSS transition starts.
+            // For a sudden spook, keep this very low (e.g., 10-30ms).
+            const delayBeforeExpansion = 20; 
+
+            setTimeout(function() {
+              sillyImage.classList.add('visible'); // Trigger CSS for expansion and fade-in
+            }, delayBeforeExpansion); 
+
+            // --- TUNABLE (JS): How long the image stays fully expanded (milliseconds) ---
+            // For a spook/jump scare, make this short (e.g., 250ms for 1/4 second, 500ms for 1/2 second).
+            const durationImageStaysExpanded = 300; // Example: Stays big for 0.3 seconds
+
+            setTimeout(function() {
+              sillyImage.classList.remove('visible'); // Trigger CSS for shrink and fade-out
+
+              // --- TUNABLE (JS): Delay to hide container after shrinking (milliseconds) ---
+              // This should generally match the CSS 'transform' transition duration.
+              // If CSS transition is 'transform 0.15s ...', then use 150ms here.
+              const cssTransformDuration = 150; // Matches the 0.15s example in CSS
+
+              setTimeout(function() {
+                sillyPopup.style.display = 'none'; // Hide the container
+                isShowingSillyImage = false; // Animation complete, allow clicking again
+              }, cssTransformDuration);
+
+            }, durationImageStaysExpanded); 
           });
         }
-      // === ADD THIS NEW CODE FOR HOMEPAGE GIF (inside DOMContentLoaded) ===
-// Check if the current page is the homepage
-const isHomePage = window.location.pathname === '{{ site.baseurl }}/' || window.location.pathname === '{{ site.baseurl }}/index.html';
 
-if (isHomePage) {
-  const dogGifElement = document.createElement('img');
-  // --- TUNABLE: Path to your running dog GIF ---
-  // Make sure 'running-dog.gif' (or your filename) is in 'assets/images/'
-  const runningDogGifSrc = "{{ '/assets/images/running-dog.gif' | relative_url }}"; 
+        // --- Logic for Homepage Running Dog GIF ---
+        const isHomePage = window.location.pathname === '{{ site.baseurl }}/' || window.location.pathname === '{{ site.baseurl }}/index.html';
+        
+        if (isHomePage) {
+          const dogGifElement = document.createElement('img');
+          const runningDogGifSrc = "{{ '/assets/images/running-dog.gif' | relative_url }}"; 
+          
+          const cssAnimationRunDuration = 5000; 
+          const cssAnimationStartDelay = 500;  
 
-  // --- TUNABLE: Match these to your CSS animation durations ---
-  const cssAnimationRunDuration = 5000; // Duration of CSS animation in milliseconds (e.g., 5s = 5000ms)
-  const cssAnimationStartDelay = 500;  // Delay before CSS animation starts (e.g., 0.5s = 500ms)
+          dogGifElement.src = runningDogGifSrc + "?t=" + new Date().getTime(); 
+          dogGifElement.alt = "Running dog animation";
+          dogGifElement.classList.add('running-dog-gif'); 
 
-  dogGifElement.src = runningDogGifSrc + "?t=" + new Date().getTime(); // Cache-buster for GIF replay
-  dogGifElement.alt = "Running dog animation";
-  dogGifElement.classList.add('running-dog-gif'); // Apply the CSS class for styling and animation
+          setTimeout(function() {
+              document.body.appendChild(dogGifElement);
+              setTimeout(function() {
+                  if (dogGifElement.parentNode) { 
+                      dogGifElement.parentNode.removeChild(dogGifElement);
+                  }
+              }, cssAnimationRunDuration); 
+          }, cssAnimationStartDelay);
+        }
+        // --- End Homepage Running Dog GIF ---
 
-  // Add the dog GIF to the page after the initial CSS delay
-  setTimeout(function() {
-      document.body.appendChild(dogGifElement);
-
-      // Remove the dog GIF element after its animation is complete
-      // Total time = animation duration itself
-      setTimeout(function() {
-          if (dogGifElement.parentNode) { // Check if it's still on the page
-              dogGifElement.parentNode.removeChild(dogGifElement);
-          }
-      }, cssAnimationRunDuration); 
-  }, cssAnimationStartDelay);
-}
-// === END HOMEPAGE GIF CODE ===
-      
-      });
+      }); // End of DOMContentLoaded listener
     </script>
 </body>
 </html>
