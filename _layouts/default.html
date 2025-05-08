@@ -57,7 +57,6 @@
         }
 
         /* === Homepage GIF Animation (Diagonal Run) === */
-        /* --- TUNABLE (CSS): Keyframes for Diagonal Movement --- */
         @keyframes run-diagonally {
           0% {
             transform: translate(-150px, 100px); 
@@ -69,24 +68,23 @@
           }
         }
 
-        .running-dog-gif {
+        .running-dog-image { /* Renamed from .running-dog-gif for clarity */
           position: fixed; 
           bottom: 0px;    
           left: 0;         
           transform: translate(-150px, 100px); 
-          width: 120px;    
-          height: auto;    
+          width: 120px;    /* Adjust to your image's desired width */
+          height: auto;    /* Maintain aspect ratio */
           z-index: 500;    
           animation-name: run-diagonally;
-          /* --- UPDATED: Animation duration (approx 8% faster than 6s) --- */
           animation-duration: 5.52s; 
           animation-timing-function: linear; 
           animation-iteration-count: 1; 
           animation-delay: 0.5s; 
           pointer-events: none; 
-          opacity: 0; 
+          opacity: 0; /* Start transparent, JS will make it visible */
         }
-        .running-dog-gif.animate {
+        .running-dog-image.animate { /* Class added by JS to trigger visibility */
             opacity: 1; 
         }
 
@@ -159,33 +157,56 @@
           });
         }
 
-        // --- Logic for Homepage Running Dog GIF (Diagonal Run) ---
-        const isHomePage = window.location.pathname === '{{ site.baseurl }}/' || window.location.pathname === '{{ site.baseurl }}/index.html';
+        // --- Logic for Homepage Running Dog (Sprite Animation) ---
+        const isHomePageForDog = window.location.pathname === '{{ site.baseurl }}/' || window.location.pathname === '{{ site.baseurl }}/index.html';
         
-        if (isHomePage) {
-          const dogGifElement = document.createElement('img');
-          const runningDogGifSrc = "{{ '/assets/images/running-dog.gif' | relative_url }}"; 
+        if (isHomePageForDog) {
+          const dogImageElement = document.createElement('img'); // Using 'img' for still images
           
-          // --- UPDATED: Animation duration in JS (approx 8% faster than 6000ms) ---
-          const cssAnimationRunDuration = 5520; // ms (5.52 seconds)
-          const cssAnimationStartDelay = 500;  // ms
+          // --- TUNABLE (JS): Array of paths to your 4 still dog images ---
+          // IMPORTANT: Replace these with the actual paths to your images in 'assets/images/'
+          const dogFrames = [
+            "{{ '/assets/images/dog-run-frame1.png' | relative_url }}",
+            "{{ '/assets/images/dog-run-frame2.png' | relative_url }}",
+            "{{ '/assets/images/dog-run-frame3.png' | relative_url }}",
+            "{{ '/assets/images/dog-run-frame4.png' | relative_url }}"
+          ];
+          let currentDogFrameIndex = 0;
+          let dogFrameIntervalId = null; // To store the interval ID for later clearing
 
-          dogGifElement.src = runningDogGifSrc + "?t=" + new Date().getTime(); 
-          dogGifElement.alt = "Running dog animation";
-          dogGifElement.classList.add('running-dog-gif'); 
+          // --- TUNABLE (JS): Frame rate for sprite animation (milliseconds per frame) ---
+          // Example: 150ms per frame. Lower is faster animation.
+          const dogFrameIntervalTime = 100; 
+          
+          const cssAnimationRunDuration = 5520; // ms (5.52 seconds) - for diagonal movement
+          const cssAnimationStartDelay = 500;  // ms - delay before diagonal movement starts
 
+          // Set initial image source
+          dogImageElement.src = dogFrames[currentDogFrameIndex] + "?t=" + new Date().getTime(); 
+          dogImageElement.alt = "Running dog animation";
+          dogImageElement.classList.add('running-dog-image'); // Apply CSS for positioning and movement
+
+          // Add the dog image to the page then trigger animation
           setTimeout(function() {
-              document.body.appendChild(dogGifElement);
-              dogGifElement.classList.add('animate'); 
+              document.body.appendChild(dogImageElement);
+              dogImageElement.classList.add('animate'); // Makes it visible and starts CSS diagonal movement
 
+              // Start the frame-by-frame sprite animation
+              dogFrameIntervalId = setInterval(function() {
+                currentDogFrameIndex = (currentDogFrameIndex + 1) % dogFrames.length;
+                dogImageElement.src = dogFrames[currentDogFrameIndex] + "?t=" + new Date().getTime();
+              }, dogFrameIntervalTime);
+
+              // Remove the dog image element and stop sprite animation after its diagonal run is complete
               setTimeout(function() {
-                  if (dogGifElement.parentNode) { 
-                      dogGifElement.parentNode.removeChild(dogGifElement);
+                  clearInterval(dogFrameIntervalId); // Stop changing frames
+                  if (dogImageElement.parentNode) { 
+                      dogImageElement.parentNode.removeChild(dogImageElement);
                   }
               }, cssAnimationRunDuration); 
           }, cssAnimationStartDelay);
         }
-        // --- End Homepage Running Dog GIF ---
+        // --- End Homepage Running Dog (Sprite Animation) ---
 
       }); // End of DOMContentLoaded listener
     </script>
