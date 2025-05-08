@@ -927,3 +927,33 @@ footer {
 #close-silly-popup:hover {
   background-color: #ddd;
 }
+/* === Homepage GIF Animation === */
+@keyframes run-across-screen {
+  0% {
+    transform: translateX(-150px); /* Start off-screen left (adjust 150px based on GIF width) */
+  }
+  100% {
+    transform: translateX(100vw); /* Move across entire viewport width, ensuring it goes fully off-screen right */
+  }
+}
+
+.running-dog-gif {
+  position: fixed; /* Stays in place relative to the screen viewport */
+  bottom: 40px;    /* Adjust how high from the bottom it runs */
+  left: 0;         /* Aligns the starting point of the transform */
+  transform: translateX(-150px); /* Initial position: off-screen left */
+  width: 120px;    /* --- TUNABLE: Adjust to the width of your dog GIF --- */
+  height: auto;    /* Maintain aspect ratio */
+  z-index: 500;    /* Layering: adjust if it needs to be above/below other fixed elements */
+  /* --- TUNABLE: Animation properties --- */
+  /* Format: animation-name animation-duration animation-timing-function animation-iteration-count */
+  animation: run-across-screen 5s linear 1; 
+  /* '5s': How long it takes to run across. Shorter is faster. */
+  /* 'linear': Runs at a constant speed. You could try 'ease-in-out' for variation. */
+  /* '1': Runs once. */
+
+  /* --- TUNABLE: Delay before animation starts (milliseconds) --- */
+  animation-delay: 0.5s; /* Starts 0.5 seconds after the page loads. Adjust as needed. */
+
+  pointer-events: none; /* Allows clicks to pass through the GIF */
+}
