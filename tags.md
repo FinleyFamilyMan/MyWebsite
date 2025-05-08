@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Recipe Tags
-permalink: /tags/ # Sets the URL for this page to /MyWebsite/tags/
+permalink: /tags/
 ---
 
 <div class="page-heading">
@@ -11,25 +11,27 @@ permalink: /tags/ # Sets the URL for this page to /MyWebsite/tags/
 </div>
 
 <div class="tag-list-container">
-  {% comment %}
-    Get all unique tags used in the 'recipes' collection.
-    The 'jekyll-archives' plugin populates site.tags with tag names mapped to posts.
-    We just need the names (keys) here.
-  {% endcomment %}
-  {% assign recipe_tags = "" | split: "," %}
-  {% for recipe in site.recipes %}
-    {% for tag in recipe.tags %}
-      {% assign recipe_tags = recipe_tags | push: tag | uniq %}
+  {% comment %} --- Collect, Clean, and Sort Tags --- {% endcomment %}
+  {% assign temp_tags_list = "" | split: "," %}
+  {% for recipe_item in site.recipes %}
+    {% for tag_from_recipe in recipe_item.tags %}
+      {% assign cleaned_tag_for_list = tag_from_recipe | strip %} 
+      {% unless cleaned_tag_for_list == "" %} 
+        {% assign temp_tags_list = temp_tags_list | push: cleaned_tag_for_list %}
+      {% endunless %}
     {% endfor %}
   {% endfor %}
-  {% assign sorted_tags = recipe_tags | sort_natural %} 
+  {% assign unique_tags_list = temp_tags_list | uniq %}
+  {% assign sorted_tags_list = unique_tags_list | sort_natural %} 
+  {% comment %} --- End Tag Collection --- {% endcomment %}
 
-  {% if sorted_tags.size > 0 %}
+  {% if sorted_tags_list.size > 0 %}
     <ul class="tag-list">
-      {% for tag in sorted_tags %}
-        {% comment %} Generate the link using the permalink structure defined in _config.yml {% endcomment %}
-        {% assign tag_url = "/recipes/tags/" | append: (tag | slugify) | relative_url %}
-        <li><a href="{{ tag_url }}" class="tag-link">{{ tag | escape }}</a></li>
+      {% for current_tag_name in sorted_tags_list %}
+        {% assign tag_page_slug = current_tag_name | slugify %} {# e.g., "family favorite" becomes "family-favorite" #}
+        {% comment %} Ensure link matches permalink structure EXACTLY, including trailing slash {% endcomment %}
+        {% assign final_tag_url = "/recipes/tags/" | append: tag_page_slug | append: "/" | relative_url %}
+        <li><a href="{{ final_tag_url }}" class="tag-link">{{ current_tag_name | escape }}</a></li>
       {% endfor %}
     </ul>
   {% else %}
