@@ -58,17 +58,12 @@
 
         /* === Homepage GIF Animation (Diagonal Run) === */
         /* --- TUNABLE (CSS): Keyframes for Diagonal Movement --- */
-        /* Adjust translateX and translateY percentages for different angles/distances */
         @keyframes run-diagonally {
           0% {
-            /* Start off-screen bottom-left */
-            transform: translate(-150px, 100px); /* -X for left, +Y for down (relative to bottom:0) */
+            transform: translate(-150px, 100px); 
             opacity: 1;
           }
           100% {
-            /* End off-screen top-right */
-            /* '100vw' ensures it goes fully across the width */
-            /* '-100vh' makes it go significantly upwards. Adjust for desired height. */
             transform: translate(100vw, -80vh); 
             opacity: 1;
           }
@@ -76,30 +71,22 @@
 
         .running-dog-gif {
           position: fixed; 
-          /* --- TUNABLE (CSS): Initial starting position (bottom-left corner) --- */
-          bottom: 0px;    /* Start at the very bottom */
+          bottom: 0px;    
           left: 0;         
-          transform: translate(-150px, 100px); /* Initial off-screen position (matches keyframe 0%) */
-          
-          /* --- TUNABLE (CSS): GIF Size --- */
+          transform: translate(-150px, 100px); 
           width: 120px;    
           height: auto;    
-          
           z-index: 500;    
-          
-          /* --- TUNABLE (CSS): Animation properties --- */
           animation-name: run-diagonally;
-          animation-duration: 6s; /* Example: 6 seconds to run diagonally */
-          animation-timing-function: linear; /* Constant speed */
-          animation-iteration-count: 1; /* Runs once */
-          animation-delay: 0.5s; /* Starts 0.5 seconds after page load */
-          
+          animation-duration: 6s; 
+          animation-timing-function: linear; 
+          animation-iteration-count: 1; 
+          animation-delay: 0.5s; 
           pointer-events: none; 
-          opacity: 0; /* Start hidden, animation will make it visible if keyframes include opacity */
+          opacity: 0; 
         }
-        /* Make it visible when animation starts if opacity is used in keyframes */
         .running-dog-gif.animate {
-            opacity: 1; /* Or manage opacity within keyframes */
+            opacity: 1; 
         }
 
     </style>
@@ -126,7 +113,7 @@
         <div class="silly-button-container">
           <button id="dont-push-button">Don't push this</button>
           <div id="silly-image-popup" class="silly-image-popup" style="display: none;">
-            <img id="silly-image" src="" alt="Surprise!"> {# src will be set by JavaScript #}
+            <img id="silly-image" src="" alt="Surprise!"> 
           </div>
         </div>
     </footer>
@@ -140,10 +127,10 @@
         const sillyImage = document.getElementById('silly-image');     
         let isShowingSillyImage = false; 
 
-        // --- REVERTED: Single GIF Path ---
-        // IMPORTANT: Replace 'your-spooky-gif.gif' with your actual spooky GIF's filename
-        // Make sure the GIF is in your 'assets/images/' folder.
-        const spookyImageSrc = "{{ '/assets/images/your-spooky-gif.gif' | relative_url }}"; 
+        // --- Single GIF Path ---
+        // IMPORTANT: Ensure 'silly-spooky.gif' (or your chosen GIF) 
+        // is in your 'assets/images/' folder.
+        const spookyImageSrc = "{{ '/assets/images/silly-spooky.gif' | relative_url }}"; 
 
         if (sillyButton && sillyPopup && sillyImage) {
           sillyButton.addEventListener('click', function() {
@@ -151,22 +138,23 @@
             isShowingSillyImage = true;
 
             // Set the single GIF source
-            sillyImage.src = spookyImageSrc + "?t=" + new Date().getTime(); 
+            sillyImage.src = spookyImageSrc + "?t=" + new Date().getTime(); // Cache-busting
 
-            sillyPopup.style.display = 'flex'; 
+            sillyPopup.style.display = 'flex'; // Show the popup container
 
-            const delayBeforeExpansion = 20; 
+            const delayBeforeExpansion = 20; // ms
             setTimeout(function() {
-              sillyImage.classList.add('visible'); 
+              sillyImage.classList.add('visible'); // Trigger expansion
             }, delayBeforeExpansion); 
 
-            const durationImageStaysExpanded = 300; 
+            const durationImageStaysExpanded = 300; // ms
             setTimeout(function() {
-              sillyImage.classList.remove('visible'); 
+              sillyImage.classList.remove('visible'); // Trigger shrink
 
-              const cssTransformDuration = 150; 
+              const cssTransformDuration = 150; // ms - Should match CSS transform duration
               setTimeout(function() {
-                sillyPopup.style.display = 'none'; 
+                sillyPopup.style.display = 'none'; // Hide popup container
+                sillyImage.src = ""; // Optional: Clear src after hiding to stop GIF
                 isShowingSillyImage = false; 
               }, cssTransformDuration);
 
@@ -179,27 +167,19 @@
         
         if (isHomePage) {
           const dogGifElement = document.createElement('img');
-          // --- TUNABLE (JS): Path to your running dog GIF ---
           const runningDogGifSrc = "{{ '/assets/images/running-dog.gif' | relative_url }}"; 
           
-          // --- TUNABLE (JS): Match these to your CSS animation durations/delays ---
-          const cssAnimationRunDuration = 6000; // Duration of CSS animation (e.g., 6s = 6000ms)
-          const cssAnimationStartDelay = 500;  // Delay before CSS animation starts (e.g., 0.5s = 500ms)
+          const cssAnimationRunDuration = 6000; // ms
+          const cssAnimationStartDelay = 500;  // ms
 
           dogGifElement.src = runningDogGifSrc + "?t=" + new Date().getTime(); 
           dogGifElement.alt = "Running dog animation";
           dogGifElement.classList.add('running-dog-gif'); 
 
-          // Add the dog GIF to the page then trigger animation by adding a class
           setTimeout(function() {
               document.body.appendChild(dogGifElement);
-              // Add a class to trigger opacity change if managed by CSS, or just rely on keyframes
-              // For simplicity, we'll assume keyframes handle opacity or it starts visible.
-              // If opacity is 0 initially in .running-dog-gif, add a class here to make it 1.
-              dogGifElement.classList.add('animate'); // If you use this, ensure .running-dog-gif.animate { opacity: 1; }
+              dogGifElement.classList.add('animate'); 
 
-              // Remove the dog GIF element after its animation is complete
-              // Total time = animation duration itself
               setTimeout(function() {
                   if (dogGifElement.parentNode) { 
                       dogGifElement.parentNode.removeChild(dogGifElement);
