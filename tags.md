@@ -28,7 +28,7 @@ permalink: /tags/
   {% if sorted_tags_list.size > 0 %}
     <ul class="tag-list">
       {% for current_tag_name in sorted_tags_list %}
-        {% assign tag_page_slug = current_tag_name | slugify %} {# e.g., "family favorite" becomes "family-favorite" #}
+        {% assign tag_page_slug = current_tag_name | slugify %}
         {% comment %} Ensure link matches permalink structure EXACTLY, including trailing slash {% endcomment %}
         {% assign final_tag_url = "/recipes/tags/" | append: tag_page_slug | append: "/" | relative_url %}
         <li><a href="{{ final_tag_url }}" class="tag-link">{{ current_tag_name | escape }}</a></li>
