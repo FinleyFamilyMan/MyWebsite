@@ -78,7 +78,8 @@
           height: auto;    
           z-index: 500;    
           animation-name: run-diagonally;
-          animation-duration: 5s; 
+          /* --- UPDATED: Animation duration (approx 8% faster than 6s) --- */
+          animation-duration: 5.52s; 
           animation-timing-function: linear; 
           animation-iteration-count: 1; 
           animation-delay: 0.5s; 
@@ -127,9 +128,6 @@
         const sillyImage = document.getElementById('silly-image');     
         let isShowingSillyImage = false; 
 
-        // --- Single GIF Path ---
-        // IMPORTANT: Ensure 'silly-spooky.gif' (or your chosen GIF) 
-        // is in your 'assets/images/' folder.
         const spookyImageSrc = "{{ '/assets/images/silly-spooky.gif' | relative_url }}"; 
 
         if (sillyButton && sillyPopup && sillyImage) {
@@ -137,24 +135,23 @@
             if (isShowingSillyImage) return; 
             isShowingSillyImage = true;
 
-            // Set the single GIF source
-            sillyImage.src = spookyImageSrc + "?t=" + new Date().getTime(); // Cache-busting
+            sillyImage.src = spookyImageSrc + "?t=" + new Date().getTime(); 
 
-            sillyPopup.style.display = 'flex'; // Show the popup container
+            sillyPopup.style.display = 'flex'; 
 
-            const delayBeforeExpansion = 20; // ms
+            const delayBeforeExpansion = 20; 
             setTimeout(function() {
-              sillyImage.classList.add('visible'); // Trigger expansion
+              sillyImage.classList.add('visible'); 
             }, delayBeforeExpansion); 
 
-            const durationImageStaysExpanded = 500; // ms
+            const durationImageStaysExpanded = 300; 
             setTimeout(function() {
-              sillyImage.classList.remove('visible'); // Trigger shrink
+              sillyImage.classList.remove('visible'); 
 
-              const cssTransformDuration = 150; // ms - Should match CSS transform duration
+              const cssTransformDuration = 150; 
               setTimeout(function() {
-                sillyPopup.style.display = 'none'; // Hide popup container
-                sillyImage.src = ""; // Optional: Clear src after hiding to stop GIF
+                sillyPopup.style.display = 'none'; 
+                sillyImage.src = ""; 
                 isShowingSillyImage = false; 
               }, cssTransformDuration);
 
@@ -169,7 +166,8 @@
           const dogGifElement = document.createElement('img');
           const runningDogGifSrc = "{{ '/assets/images/running-dog.gif' | relative_url }}"; 
           
-          const cssAnimationRunDuration = 6000; // ms
+          // --- UPDATED: Animation duration in JS (approx 8% faster than 6000ms) ---
+          const cssAnimationRunDuration = 5520; // ms (5.52 seconds)
           const cssAnimationStartDelay = 500;  // ms
 
           dogGifElement.src = runningDogGifSrc + "?t=" + new Date().getTime(); 
