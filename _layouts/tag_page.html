@@ -3,7 +3,7 @@ layout: default
 ---
 
 <div class="page-heading">
-  <h1>{{ page.title | escape }}</h1> {# This title comes from the front matter of your tag files like dessert.md #}
+  <h1>{{ page.title | escape }}</h1> 
   <p>
     <a href="{{ "/tags/" | relative_url }}">&laquo; View All Tags</a> | 
     <a href="{{ "/recipes/" | relative_url }}">View All Recipes &raquo;</a>
@@ -13,9 +13,8 @@ layout: default
 {% comment %} Inside <div class="recipe-list-container two-column-layout"> {% endcomment %}
 
   {% comment %} --- CORRECTED Pure Jekyll Recipe Filtering Logic --- {% endcomment %}
-  {% assign recipes_for_tag_filtered = "" | split: "," %} {# Initialize empty array for filtered results #}
-  {% assign current_page_tag_value = page.tag | strip | downcase %} {# Get tag from this page's front matter, strip whitespace, and lowercase it #}
-
+  {% assign recipes_for_tag_filtered = "" | split: "," %}
+  {% assign current_page_tag_value = page.tag | strip | downcase %} 
   {% for recipe_item in site.recipes %}
     {% assign recipe_has_current_tag = false %}
     {% for tag_in_recipe_item in recipe_item.tags %}
@@ -23,7 +22,7 @@ layout: default
       {% comment %} The 'if' condition below was the source of the Liquid error. Corrected. {% endcomment %}
       {% if processed_tag_in_recipe == current_page_tag_value %}
         {% assign recipe_has_current_tag = true %}
-        {% break %} {# Exit inner loop once tag is found for this recipe #}
+        {% break %} 
       {% endif %}
     {% endfor %}
     
@@ -32,8 +31,7 @@ layout: default
     {% endif %}
   {% endfor %}
 
-  {% assign recipes_for_tag_sorted = recipes_for_tag_filtered | sort: 'title' %} {# Sort the filtered recipes alphabetically #}
-
+  {% assign recipes_for_tag_sorted = recipes_for_tag_filtered | sort: 'title' %} 
   {% if recipes_for_tag_sorted.size > 0 %}
     {% for recipe_card_item in recipes_for_tag_sorted %}
        {% include recipe_preview_card.html recipe=recipe_card_item %}
