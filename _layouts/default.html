@@ -67,6 +67,39 @@
              }
           });
         }
+      // === ADD THIS NEW CODE FOR HOMEPAGE GIF (inside DOMContentLoaded) ===
+// Check if the current page is the homepage
+const isHomePage = window.location.pathname === '{{ site.baseurl }}/' || window.location.pathname === '{{ site.baseurl }}/index.html';
+
+if (isHomePage) {
+  const dogGifElement = document.createElement('img');
+  // --- TUNABLE: Path to your running dog GIF ---
+  // Make sure 'running-dog.gif' (or your filename) is in 'assets/images/'
+  const runningDogGifSrc = "{{ '/assets/images/running-dog.gif' | relative_url }}"; 
+
+  // --- TUNABLE: Match these to your CSS animation durations ---
+  const cssAnimationRunDuration = 5000; // Duration of CSS animation in milliseconds (e.g., 5s = 5000ms)
+  const cssAnimationStartDelay = 500;  // Delay before CSS animation starts (e.g., 0.5s = 500ms)
+
+  dogGifElement.src = runningDogGifSrc + "?t=" + new Date().getTime(); // Cache-buster for GIF replay
+  dogGifElement.alt = "Running dog animation";
+  dogGifElement.classList.add('running-dog-gif'); // Apply the CSS class for styling and animation
+
+  // Add the dog GIF to the page after the initial CSS delay
+  setTimeout(function() {
+      document.body.appendChild(dogGifElement);
+
+      // Remove the dog GIF element after its animation is complete
+      // Total time = animation duration itself
+      setTimeout(function() {
+          if (dogGifElement.parentNode) { // Check if it's still on the page
+              dogGifElement.parentNode.removeChild(dogGifElement);
+          }
+      }, cssAnimationRunDuration); 
+  }, cssAnimationStartDelay);
+}
+// === END HOMEPAGE GIF CODE ===
+      
       });
     </script>
 </body>
