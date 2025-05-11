@@ -9,7 +9,7 @@ title: Home
     <img src="{{ '/assets/images/family_photo_placeholder.JPEG' | relative_url }}" 
          alt="Welcome to the Finley Family Website" 
          class="event-image-placeholder" 
-         style="width: 100%; height: 350px; object-fit: cover; margin-bottom: 20px; border-radius: 8px;">
+         style="width: 100%; height: 500px; object-fit: cover; margin-bottom: 20px; border-radius: 8px;">
     <p>Welcome to our little corner of the internet! We're glad you stopped by. Check out some of our memories on the <a href="{{ '/photos/' | relative_url }}">Photos Page</a>.</p>
 </div>
 
@@ -47,7 +47,7 @@ title: Home
 
 <div class="about-section">
     <h2>About Our Family</h2>
-    <img src="{{ '/assets/images/About_Us.JPEG' | relative_url }}" 
+    <img src="{{ '/assets/images/About_Us.jpg' | relative_url }}" 
          alt="The Finley Family - About Us" 
          class="about-image-placeholder"
          style="width: 275px; height: 213px; object-fit: cover; float: left; margin-right: 20px; margin-bottom: 10px; border-radius: 5px;">
@@ -74,7 +74,7 @@ title: Home
             <img src="{{ '/assets/images/Blu_With_Flower_Photo.JPEG' | relative_url }}" 
                  alt="Blu, the Finley family dog" 
                  class="event-image-placeholder"
-                 style="object-fit: cover; width: 100%; height: 350px;">
+                 style="object-fit: cover; width: 100%; height: 500px;">
             <p>...and since then have been living together Happily (with Blu) in Orlando Florida.</p>
         </div>
     </div>
