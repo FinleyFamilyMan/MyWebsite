@@ -47,7 +47,7 @@ title: Home
 
 <div class="about-section">
     <h2>About Our Family</h2>
-    <img src="{{ '/assets/images/About_Us.JPEG' | relative_url }}" 
+    <img src="{{ '/assets/images/About_Us.jpg' | relative_url }}" 
          alt="The Finley Family - About Us" 
          class="about-image-placeholder"
          style="object-fit: cover;">
