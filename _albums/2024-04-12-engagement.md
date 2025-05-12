@@ -3,13 +3,13 @@ layout: album
 title: "Engagement 2024!"
 date: 2024-04-12
 caption: "Distract, Distract, Propose!"
-main_image: /assets/images/albums/engagement-2024/1000008566.png 
+main_image: /assets/images/albums/engagement-2024/1000008566.jpg 
 images: 
-  - url: /assets/images/albums/engagement-2024/1000008566.png
+  - url: /assets/images/albums/engagement-2024/1000008566.jpg
     alt: "" 
   - url: /assets/images/albums/engagement-2024/1000004058.png
     alt: ""
-  - url: /assets/images/albums/engagement-2024/1000004050.jpg
+  - url: /assets/images/albums/engagement-2024/1000004050.png
     alt: ""
   - url: /assets/images/albums/engagement-2024/1000008568.jpg
     alt: ""
